@@ -1,6 +1,8 @@
 # ER_AWESOME
 We ate too much bacon and now we be chilling at the ER
 
+## Link to the trello kanban board: (https://trello.com/b/z6jREHCj/reimbursement-project)
+
 # Expense Reimbursement System (ERS)
 
 # Teams
