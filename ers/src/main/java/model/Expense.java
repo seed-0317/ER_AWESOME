@@ -9,10 +9,10 @@ public class Expense {
     private String r_description;
     private Timestamp r_submitted;
     private Timestamp r_resolved;
-    private User u_id_author;
-    private User u_id_resolver;
-    private ExpenseType rt_type;
-    private ExpenseStatus rt_status;
+    private User u_author;
+    private User u_resolver;
+    private ExpenseType r_type;
+    private ExpenseStatus r_status;
 
     public Expense() {
     }
@@ -58,36 +58,36 @@ public class Expense {
         this.r_resolved = r_resolved;
     }
 
-    public User getU_id_author() {
-        return u_id_author;
+    public User getU_author() {
+        return u_author;
     }
 
-    public void setU_id_author(User u_id_author) {
-        this.u_id_author = u_id_author;
+    public void setU_author(User u_author) {
+        this.u_author = u_author;
     }
 
-    public User getU_id_resolver() {
-        return u_id_resolver;
+    public User getU_resolver() {
+        return u_resolver;
     }
 
-    public void setU_id_resolver(User u_id_resolver) {
-        this.u_id_resolver = u_id_resolver;
+    public void setU_resolver(User u_resolver) {
+        this.u_resolver = u_resolver;
     }
 
-    public ExpenseType getRt_type() {
-        return rt_type;
+    public ExpenseType getR_type() {
+        return r_type;
     }
 
-    public void setRt_type(ExpenseType rt_type) {
-        this.rt_type = rt_type;
+    public void setR_type(ExpenseType r_type) {
+        this.r_type = r_type;
     }
 
-    public ExpenseStatus getRt_status() {
-        return rt_status;
+    public ExpenseStatus getR_status() {
+        return r_status;
     }
 
-    public void setRt_status(ExpenseStatus rt_status) {
-        this.rt_status = rt_status;
+    public void setR_status(ExpenseStatus r_status) {
+        this.r_status = r_status;
     }
 
     @Override
@@ -102,10 +102,10 @@ public class Expense {
         if (!getR_description().equals(expense.getR_description())) return false;
         if (!getR_submitted().equals(expense.getR_submitted())) return false;
         if (!getR_resolved().equals(expense.getR_resolved())) return false;
-        if (!getU_id_author().equals(expense.getU_id_author())) return false;
-        if (!getU_id_resolver().equals(expense.getU_id_resolver())) return false;
-        if (!getRt_type().equals(expense.getRt_type())) return false;
-        return getRt_status().equals(expense.getRt_status());
+        if (!getU_author().equals(expense.getU_author())) return false;
+        if (!getU_resolver().equals(expense.getU_resolver())) return false;
+        if (!getR_type().equals(expense.getR_type())) return false;
+        return getR_status().equals(expense.getR_status());
     }
 
     @Override
@@ -118,10 +118,10 @@ public class Expense {
         result = 31 * result + getR_description().hashCode();
         result = 31 * result + getR_submitted().hashCode();
         result = 31 * result + getR_resolved().hashCode();
-        result = 31 * result + getU_id_author().hashCode();
-        result = 31 * result + getU_id_resolver().hashCode();
-        result = 31 * result + getRt_type().hashCode();
-        result = 31 * result + getRt_status().hashCode();
+        result = 31 * result + getU_author().hashCode();
+        result = 31 * result + getU_resolver().hashCode();
+        result = 31 * result + getR_type().hashCode();
+        result = 31 * result + getR_status().hashCode();
         return result;
     }
 
@@ -133,10 +133,10 @@ public class Expense {
                 ", r_description='" + r_description + '\'' +
                 ", r_submitted=" + r_submitted +
                 ", r_resolved=" + r_resolved +
-                ", u_id_author=" + u_id_author +
-                ", u_id_resolver=" + u_id_resolver +
-                ", rt_type=" + rt_type +
-                ", rt_status=" + rt_status +
+                ", u_author=" + u_author +
+                ", u_resolver=" + u_resolver +
+                ", r_type=" + r_type +
+                ", r_status=" + r_status +
                 '}';
     }
 }

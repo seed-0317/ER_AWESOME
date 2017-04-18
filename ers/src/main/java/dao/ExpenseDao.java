@@ -1,6 +1,8 @@
 package dao;
 
 import model.Expense;
+import model.ExpenseStatus;
+import model.ExpenseType;
 
 import java.util.ArrayList;
 
@@ -15,5 +17,8 @@ public interface ExpenseDao {
 
     public void UpdateReimbursement(Expense reimb);  // change existing reimb
 
+    public ArrayList<ExpenseType> getExpenseTypeList();
+
+    public ArrayList<ExpenseStatus> getExpenseStatusList();
 
 }
