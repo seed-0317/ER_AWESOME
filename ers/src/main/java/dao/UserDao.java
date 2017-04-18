@@ -1,5 +1,6 @@
 package dao;
 
+import model.ExpenseType;
 import model.User;
 
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ public interface UserDao {
     public void updateEmployee(User emp);
 
     public User getUser (String username);
+
 
 }
 
