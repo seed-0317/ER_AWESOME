@@ -12,7 +12,7 @@ import java.io.IOException;
 public class EmployeeViewServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
+        req.getRequestDispatcher("empHome").forward(req,resp);
     }
 
     @Override
