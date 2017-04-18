@@ -15,7 +15,7 @@ public class UpdatePersonalDataServlet extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
+        req.getRequestDispatcher("empInfo").forward(req,resp);
     }
 
     @Override
