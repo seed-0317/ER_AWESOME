@@ -14,7 +14,7 @@ public interface UserDao {
 
     public void updateEmployee(User emp);
 
-    public User getUser (int userId);
+    public User getUser (String username);
 
 }
 
