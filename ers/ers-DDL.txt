@@ -38,3 +38,25 @@ create table ers_reimbursements (
     rt_type integer not null references  ers_reimbursement_type(rt_id),
     rt_status integer not null references ers_reimbursement_status(rs_id)
     );
+    
+    
+ERS DML
+
+begin;
+insert into ers_reimbursement_status (rs_status) values('SUBMITTED');
+insert into ers_reimbursement_status (rs_status) values('APPROVED');
+insert into ers_reimbursement_status (rs_status) values('DENIED');
+commit;
+
+begin;
+insert into ers_user_roles (ur_role) values ('MANAGER');
+insert into ers_user_roles (ur_role) values ('EMPLOYEE');
+commit;
+
+begin;
+insert into ers_reimbursement_type (rt_type) values ('MEALS');
+insert into ers_reimbursement_type (rt_type) values ('TRAVEL');
+insert into ers_reimbursement_type (rt_type) values ('MILEAGE');
+insert into ers_reimbursement_type (rt_type) values ('SUPPLIES');
+insert into ers_reimbursement_type (rt_type) values ('OTHER');
+commit;
