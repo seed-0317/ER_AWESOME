@@ -51,6 +51,12 @@
             <version>2.3.25-incubating</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.0.0</version>
+        </dependency>
+
     </dependencies>
 
     <packaging>war</packaging>  <!-- default is something else-->

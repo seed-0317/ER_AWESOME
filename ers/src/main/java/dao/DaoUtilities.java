@@ -33,22 +33,14 @@ public class DaoUtilities {
         return userDaoImpl;
     }
 
-    static synchronized Connection getConnection() throws SQLException {
-        if (connection == null) {
-            try {
-                Class.forName("org.postgresql.Driver");
-            }
-            catch (ClassNotFoundException e) {
-                System.out.println("Could not register driver!");
-                e.printStackTrace();
-            }
+    public static Connection getConnection() {
+
+        Connection connection = null;
+        try {
             connection = DriverManager.getConnection(URL, CONNECTION_USERNAME, CONNECTION_PASSWORD);
         }
-        // If connection was closed then retrieve a new connection
-        if (connection.isClosed()) {
-
-            connection = DriverManager.getConnection(URL, CONNECTION_USERNAME, CONNECTION_PASSWORD);
-
+        catch (SQLException e) {
+            e.printStackTrace();
         }
         return connection;
 
