@@ -1,5 +1,9 @@
 package servlet;
 
+import dao.DaoUtilities;
+import dao.UserDao;
+import model.User;
+
 import javax.servlet.http.HttpServlet;
 
 import javax.servlet.ServletException;
@@ -15,7 +19,15 @@ public class UpdatePersonalDataServlet extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("empInfo").forward(req,resp);
+
+
+        HttpSession session = req.getSession();
+        String var = (String) session.getAttribute("user");
+
+        req.getRequestDispatcher("empInfo.html").forward(req,resp);
+
+
+
     }
 
     @Override
