@@ -29,7 +29,7 @@ public class UserDaoImpl implements UserDao {
 
             stmt = connection.prepareStatement(sql);
 
-            ResultSet rs = stmt.executeQuery(sql);
+            ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
                 User u = new User();
@@ -129,7 +129,7 @@ public class UserDaoImpl implements UserDao {
 
             stmt.setString(1, username);
 
-            ResultSet rs = stmt.executeQuery(sql);
+            ResultSet rs = stmt.executeQuery();
 
 
             while (rs.next()) {

@@ -36,7 +36,7 @@ public class ExpenseDaoImpl implements ExpenseDao{
 
             stmt = connection.prepareStatement(sql);
 
-            ResultSet rs = stmt.executeQuery(sql);
+            ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
 
@@ -199,7 +199,7 @@ public class ExpenseDaoImpl implements ExpenseDao{
 
             stmt = connection.prepareStatement(sql);
 
-            ResultSet rs = stmt.executeQuery(sql);
+            ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
 
@@ -232,7 +232,7 @@ public class ExpenseDaoImpl implements ExpenseDao{
 
             stmt = connection.prepareStatement(sql);
 
-            ResultSet rs = stmt.executeQuery(sql);
+            ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
 
