@@ -6,7 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<style>
+    .upper, .lower {
+    position: absolute;
+    left: 0;
+    right: 0;
+    }
 
+    .upper {
+    top: 5%;
+    height: 65%;
+    background-color: white;
+    overflow:scroll;
+    }
+
+    .lower {
+    bottom: 0;
+    height: 25%;
+    background-color: antiquewhite;
+    }
+    </style>
 </head>
 
 <body>
@@ -18,41 +37,22 @@
     <li role="presentation"><a href="#">Logout</a></li>
     </ul>
     <hr />
+</div>
 
-    <div class="upper">This will scroll</div>
-    <div class="lower">This will not</div>
-
-
-    .upper, .lower {
-    position: relative;
-    left: 0;
-    right: 0;
-    }
-
-    .upper {
-    top: 0;
-    height: 50%;
-    background-color: pink;
-    overflow:scroll;
-    }
-
-    .lower {
-    bottom: 0;
-    height: 50%;
-    background-color: blue;
-    }
+ <div class="upper">
+     <h2><u>Previous Expense Submissions</u></h2>
     <table class="table table-striped">
         <thead class="table-bordered">
             <tr>
             <th class="col-md-1">Request ID</th>
             <th class="col-md-1">Amount</th>
-            <th class="col-md-2">does this change</th>
+            <th class="col-md-2">Expense Description</th>
             <th class="col-md-1">Date Submitted</th>
             <th class="col-md-1">Date Resolved</th>
             <th class="col-md-2">Type</th>
             <th class="col-md-1">Status</th>
             <th class="col-md-1">Expense Submitter</th>
-            <th class="col-md-1">Manager Resolver</th>
+            <th class="col-md-1">Resolver</th>
             </tr>
                 </thead>
 <!--This is just dummy data for now-->
@@ -70,10 +70,44 @@
             </tr>
         </tbody>
     </table>
+ </div>
 
-    <form class ="form inline">
-
-    </form>
+    <div class = "lower">
+    <div class ="form inline">
+        <h2><u>New Expense Submission</u></h2>
+        <!--<div class="col-md-1">-->
+          <!--<label for="rid">Request ID</label>-->
+            <!--<input class="form-control" id="rid" type="text" placeholder="100">-->
+        <!--</div>-->
+        <div class = "row">
+        <div class="col-md-1">
+            <label for="amount">Amount</label>
+            <input class="form-control" id="amount" type="text" placeholder="$0.00">
+        </div>
+        <div class="col-md-3">
+            <label for="expdesc">Expense Description</label>
+            <input class="form-control" id="expdesc" type="text" placeholder="Reason for Expense">
+        </div>
+        <div class="col-md-2">
+            <label for="datesub">Date submitted</label>
+            <input class="form-control" id="datesub" type="text" placeholder="1/1/2017">
+        </div>
+        <div class="col-md-2"> <!--this needs to be dropdown>-->
+            <label for="type">Expense Type</label>
+            <input class="form-control" id="type" type="text" placeholder="Meals">
+        </div>
+        <br />
+        <div class="col-md-2">
+            <div class ="form-group">
+            <button type="submit" class="btn" value="Login">Submit</button>
+            </div>
+        </div>
+        </div>
+        <!--<div class="col-md-2">
+            <!--<label for="username">Submitter</label>-->
+            <!--<input class="form-control" id="username" type="text" placeholder="Jane Doe">-->
+        <!--</div>-->
+</div>
 </div>
 </body>
 </html>
