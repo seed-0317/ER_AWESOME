@@ -18,20 +18,25 @@
     display: flex;
     position: fixed;
     align-items: center;
-    justify-content: center;
-}
+    justify-content: center;}
 </style>
 
 <div class="container">
     <div class="well">
     Welcome! Please enter your user name
     <BR />
-        <div class="form-group">
-            <label for="usr">User Name:</label>
-            <input type="text" class="form-control" id="usr">
+        <div class="form-group" method="post">
+            <label for="user">User Name:</label>
+            <input type="submit" class="form-control" id="user" name="user">
         </div>
-        <button type="button" class="btn">Submit</button>
+        <button type="submit" class="btn" value="Login">Submit</button>
 
+    <!--<h1>Login</h1>-->
+        <!---->
+    <!--<form action="login" method="post">        -->
+        <!--Username: <input type="text" name="dog"/><br/>        -->
+        <!--<input type="submit" value="Login"/>        -->
+    <!--</form>-->
 </div>
 </div>
 </body>
