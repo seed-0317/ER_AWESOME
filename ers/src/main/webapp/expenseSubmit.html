@@ -13,12 +13,34 @@
 <div>
 
     <ul class="nav nav-pills">
-        <li role="presentation" class="active"><a href="#">Expenses</a></li>
-        <li role="presentation"><a href="#">Employee Data</a></li>
-        <li role="presentation"><a href="#">Logout</a></li>
+    <li role="presentation" class="active"><a href="#">Expenses</a></li>
+    <li role="presentation"><a href="#">Employee Data</a></li>
+    <li role="presentation"><a href="#">Logout</a></li>
     </ul>
     <hr />
 
+    <div class="upper">This will scroll</div>
+    <div class="lower">This will not</div>
+
+
+    .upper, .lower {
+    position: relative;
+    left: 0;
+    right: 0;
+    }
+
+    .upper {
+    top: 0;
+    height: 50%;
+    background-color: pink;
+    overflow:scroll;
+    }
+
+    .lower {
+    bottom: 0;
+    height: 50%;
+    background-color: blue;
+    }
     <table class="table table-striped">
         <thead class="table-bordered">
             <tr>
@@ -48,6 +70,7 @@
             </tr>
         </tbody>
     </table>
+
     <form class ="form inline">
 
     </form>
