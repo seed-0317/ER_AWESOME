@@ -1,7 +1,11 @@
 package servlet;
 
 import dao.DaoUtilities;
+import dao.ExpenseDao;
 import dao.UserDao;
+import model.Expense;
+import model.ExpenseStatus;
+import model.ExpenseType;
 import model.User;
 
 import javax.servlet.http.HttpServlet;
@@ -13,6 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLIntegrityConstraintViolationException;
+import java.sql.Timestamp;
 
 
 @WebServlet (value = "/SubmitReimbursementServlet")
@@ -28,14 +34,51 @@ public class SubmitReimbursementServlet extends HttpServlet {
 
         Double amount = Double.parseDouble(req.getParameter("amount"));
         String description = req.getParameter("description");
-        String datesubmitted = req.getParameter("submitted");
-        String dateresolved = "";
-        String type = req.getParameter("type");
-        String author = req.getParameter("author");
-        String resolved = "";
-        String status = "Submitted";
+        String utype = req.getParameter("type");
+        String uauthor = req.getParameter("author");
 
-        
+        User currUser = new User();
+        currUser.setuUserName(uauthor);
+
+        ExpenseType currExpense = new ExpenseType();
+        currExpense.setRtType(utype);
+
+        ExpenseStatus currStatus = new ExpenseStatus();
+        currStatus.setRsStatus("Submitted");
+
+        Timestamp datesubmitted = new Timestamp(System.currentTimeMillis());
+
+        Expense newExpense = new Expense(amount,description,datesubmitted,currExpense,currUser,currStatus);
+
+
+//        public User(int uID, String uUserName, String uFirstName, String uLastName, String uEmail, UserRoles uRole) {
+//            this.uID = uID;
+//            this.uUserName = uUserName;
+//            this.uFirstName = uFirstName;
+//            this.uLastName = uLastName;
+//            this.uEmail = uEmail;
+//            this.uRole = uRole;
+//        }
+
+        ExpenseDao dao = DaoUtilities.getExpenseDao();
+        try {
+            dao.AddReimbursement(newExpense);
+            req.getSession().setAttribute("message", "Reimbursement Added");
+            req.getSession().setAttribute("messageClass", "alert-success");
+            resp.sendRedirect("expenseSubmit.html");
+        }
+
+            catch (Exception e){
+                e.printStackTrace();
+
+                //change the message
+                req.getSession().setAttribute("message", "There was a problem creating the submission");
+                req.getSession().setAttribute("messageClass", "alert-danger");
+
+                req.getRequestDispatcher("expenseSubmit.html").forward(req, resp);
+
+            }
+        }
 
     }
-}
+

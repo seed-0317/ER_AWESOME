@@ -13,7 +13,7 @@ public interface ExpenseDao {
 
     public ArrayList<Expense> getAllExpenses();
 
-    public void AddReimbursement (Expense reimb);  //insert newe reimmb
+    public void AddReimbursement (Expense reimb);  //insert new reimmb
 
     public void UpdateReimbursement(Expense reimb);  // change existing reimb
 

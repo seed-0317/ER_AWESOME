@@ -14,9 +14,17 @@ public class Expense {
     private ExpenseType rType;
     private ExpenseStatus rStatus;
 
-    public Expense() {
+    public Expense(){
     }
 
+    public Expense(double rAmount, String rDescription,Timestamp rSubmitted, ExpenseType rType, User uAuthor, ExpenseStatus rStatus) {
+        this.rAmount = rAmount;
+        this.rDescription = rDescription;
+        this.rSubmitted = rSubmitted;
+        this.rType = rType;
+        this.uAuthor = uAuthor;
+        this.rStatus = rStatus;
+    }
 
     public int getrId() {
         return rId;
