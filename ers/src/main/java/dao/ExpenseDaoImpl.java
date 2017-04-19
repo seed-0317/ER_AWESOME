@@ -31,7 +31,7 @@ public class ExpenseDaoImpl implements ExpenseDao{
             sql = sql + "  from erawesome.ers_reimbursements a";
             sql = sql + "  join erawesome.ers_users b on b.u_id = a.u_id_author";
             sql = sql + "  join erawesome.ers_users c on c.u_id = a.u_id_resolver";
-            sql = sql + "  join erawesome.ers_reimbursement_status d on d.rs_id = a.rs_status";
+            sql = sql + "  join erawesome.ers_reimbursement_status d on d.rs_id = a.rt_status";
             sql = sql + "  join erawesome.ers_reimbursement_type e on e.rt_id = a.rt_type";
 
             stmt = connection.prepareStatement(sql);
