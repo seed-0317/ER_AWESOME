@@ -1,5 +1,9 @@
 package servlet;
 
+import dao.DaoUtilities;
+import dao.UserDao;
+import model.User;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,6 +22,18 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        UserDao dao = DaoUtilities.getUserDao();
+        String username = request.getParameter("name");
+        User user = dao.getUser(username);
+
+        if(user == null) {
+            response.sendRedirect("login");
+        } else {
+            HttpSession session = request.getSession();
+            session.setAttribute("user", user);
+            response.sendRedirect("UpdatePersonalData");
+        }
 
     }
 }
