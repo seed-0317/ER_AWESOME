@@ -45,31 +45,31 @@ public class ExpenseDaoImpl implements ExpenseDao{
 
                 Expense exp = new Expense();
 
-                exp.setR_id(rs.getInt("r_id"));
-                exp.setR_amount(rs.getDouble("r_amount"));
-                exp.setR_description(rs.getString("r_description"));
-                exp.setR_submitted(rs.getTimestamp("r_submitted"));
-                exp.setR_resolved(rs.getTimestamp("r_resolved"));
+                exp.setrId(rs.getInt("r_id"));
+                exp.setrAmount(rs.getDouble("r_amount"));
+                exp.setrDescription(rs.getString("r_description"));
+                exp.setrSubmitted(rs.getTimestamp("r_submitted"));
+                exp.setrResolved(rs.getTimestamp("r_resolved"));
 
                 //Add Author user object
                 User author = dao.getUser(rs.getString("authorname"));
-                exp.setU_author(author);
+                exp.setuAuthor(author);
 
                 //Add Resolver user object
                 User resolver = dao.getUser(rs.getString("resolvername"));
-                exp.setU_resolver(resolver);
+                exp.setuResolver(resolver);
 
                 //Add Expense Type Object
                 ExpenseType etype = new ExpenseType();
-                etype.setRt_id(rs.getInt("rt_id"));
-                etype.setRt_type(rs.getString("rt_type"));
-                exp.setR_type(etype);
+                etype.setRtId(rs.getInt("rt_id"));
+                etype.setRtType(rs.getString("rt_type"));
+                exp.setrType(etype);
 
                 //Add Expense Status Object
                 ExpenseStatus estat = new ExpenseStatus();
-                estat.setRs_id(rs.getInt("rs_id"));
-                estat.setRs_status(rs.getString("rs_status"));
-                exp.setR_status(estat);
+                estat.setRsId(rs.getInt("rs_id"));
+                estat.setRsStatus(rs.getString("rs_status"));
+                exp.setrStatus(estat);
 
                 expenses.add(exp);
             }
@@ -109,13 +109,13 @@ public class ExpenseDaoImpl implements ExpenseDao{
             stmt = connection.prepareStatement(sql);
 
 
-            stmt.setDouble(1, reimb.getR_amount());
-            stmt.setString(2, reimb.getR_description());
-            stmt.setTimestamp(3, reimb.getR_submitted());
-            stmt.setTimestamp(4, reimb.getR_resolved());
-            stmt.setInt(5, reimb.getU_author().getU_id());
+            stmt.setDouble(1, reimb.getrAmount());
+            stmt.setString(2, reimb.getrDescription());
+            stmt.setTimestamp(3, reimb.getrSubmitted());
+            stmt.setTimestamp(4, reimb.getrResolved());
+            stmt.setInt(5, reimb.getuAuthor().getuID());
 
-            int r = reimb.getU_resolver().getU_id();
+            int r = reimb.getuResolver().getuID();
             if (r !=0){
                 stmt.setInt(6, r);
             }
@@ -123,8 +123,8 @@ public class ExpenseDaoImpl implements ExpenseDao{
                 stmt.setNull(6, java.sql.Types.INTEGER );
             }
 
-            stmt.setInt(7, reimb.getR_type().getRt_id());
-            stmt.setInt(8, reimb.getR_status().getRs_id());
+            stmt.setInt(7, reimb.getrType().getRtId());
+            stmt.setInt(8, reimb.getrStatus().getRsId());
 
             success = stmt.executeUpdate();
 
@@ -164,15 +164,15 @@ public class ExpenseDaoImpl implements ExpenseDao{
             stmt = connection.prepareStatement(sql);
 
 
-            stmt.setDouble(1, reimb.getR_amount());
-            stmt.setString(2, reimb.getR_description());
-            stmt.setTimestamp(3, reimb.getR_submitted());
-            stmt.setTimestamp(4, reimb.getR_resolved());
-            stmt.setInt(5, reimb.getU_author().getU_id());
-            stmt.setInt(6, reimb.getU_resolver().getU_id());
-            stmt.setInt(7, reimb.getR_type().getRt_id());
-            stmt.setInt(8, reimb.getR_status().getRs_id());
-            stmt.setInt(9, reimb.getR_id());
+            stmt.setDouble(1, reimb.getrAmount());
+            stmt.setString(2, reimb.getrDescription());
+            stmt.setTimestamp(3, reimb.getrSubmitted());
+            stmt.setTimestamp(4, reimb.getrResolved());
+            stmt.setInt(5, reimb.getuAuthor().getuID());
+            stmt.setInt(6, reimb.getuResolver().getuID());
+            stmt.setInt(7, reimb.getrType().getRtId());
+            stmt.setInt(8, reimb.getrStatus().getRsId());
+            stmt.setInt(9, reimb.getrId());
 
             success = stmt.executeUpdate();
 
@@ -216,8 +216,8 @@ public class ExpenseDaoImpl implements ExpenseDao{
 
                 ExpenseType etype = new ExpenseType();
 
-                etype.setRt_id(rs.getInt("rt_id"));
-                etype.setRt_type(rs.getString("rt_type"));
+                etype.setRtId(rs.getInt("rt_id"));
+                etype.setRtType(rs.getString("rt_type"));
 
                 exptypes.add(etype);
             }
@@ -249,8 +249,8 @@ public class ExpenseDaoImpl implements ExpenseDao{
 
                 ExpenseStatus estat = new ExpenseStatus();
 
-                estat.setRs_id(rs.getInt("rs_id"));
-                estat.setRs_status(rs.getString("rs_status"));
+                estat.setRsId(rs.getInt("rs_id"));
+                estat.setRsStatus(rs.getString("rs_status"));
 
                 expstats.add(estat);
             }

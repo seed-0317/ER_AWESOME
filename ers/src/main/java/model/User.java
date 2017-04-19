@@ -2,68 +2,68 @@ package model;
 
 public class User {
 
-    private int u_id;
-    private String u_username;
-    private String u_firstname;
-    private String u_lastname;
-    private String u_email;
-    private UserRoles u_role;
+    private int uID;
+    private String uUserName;
+    private String uFirstName;
+    private String uLastName;
+    private String uEmail;
+    private UserRoles uRole;
 
     public User() {
     }
 
-    public User(int u_id, String u_username, String u_firstname, String u_lastname, String u_email, UserRoles u_role) {
-        this.u_id = u_id;
-        this.u_username = u_username;
-        this.u_firstname = u_firstname;
-        this.u_lastname = u_lastname;
-        this.u_email = u_email;
-        this.u_role = u_role;
+    public User(int uID, String uUserName, String uFirstName, String uLastName, String uEmail, UserRoles uRole) {
+        this.uID = uID;
+        this.uUserName = uUserName;
+        this.uFirstName = uFirstName;
+        this.uLastName = uLastName;
+        this.uEmail = uEmail;
+        this.uRole = uRole;
     }
 
 
-    public int getU_id() {
-        return u_id;
+    public int getuID() {
+        return uID;
     }
 
-    public void setU_id(int u_id) {
-        this.u_id = u_id;
+    public void setuID(int uID) {
+        this.uID = uID;
     }
 
-    public String getU_username() { return u_username; }
+    public String getuUserName() { return uUserName; }
 
-    public void setU_username(String u_username) { this.u_username = u_username;}
+    public void setuUserName(String uUserName) { this.uUserName = uUserName;}
 
-    public String getU_firstname() {
-        return u_firstname;
+    public String getuFirstName() {
+        return uFirstName;
     }
 
-    public void setU_firstname(String u_firstname) {
-        this.u_firstname = u_firstname;
+    public void setuFirstName(String uFirstName) {
+        this.uFirstName = uFirstName;
     }
 
-    public String getU_lastname() {
-        return u_lastname;
+    public String getuLastName() {
+        return uLastName;
     }
 
-    public void setU_lastname(String u_lastname) {
-        this.u_lastname = u_lastname;
+    public void setuLastName(String uLastName) {
+        this.uLastName = uLastName;
     }
 
-    public String getU_email() {
-        return u_email;
+    public String getuEmail() {
+        return uEmail;
     }
 
-    public void setU_email(String u_email) {
-        this.u_email = u_email;
+    public void setuEmail(String uEmail) {
+        this.uEmail = uEmail;
     }
 
-    public UserRoles getU_role() {
-        return u_role;
+    public UserRoles getuRole() {
+        return uRole;
     }
 
-    public void setU_role(UserRoles u_role) {
-        this.u_role= u_role;
+    public void setuRole(UserRoles uRole) {
+        this.uRole = uRole;
     }
 
 
@@ -74,35 +74,35 @@ public class User {
 
         User user = (User) o;
 
-        if (getU_id() != user.getU_id()) return false;
-        if (!getU_username().equals(user.getU_username())) return false;
-        if (!getU_firstname().equals(user.getU_firstname())) return false;
-        if (!getU_lastname().equals(user.getU_lastname())) return false;
-        if (!getU_email().equals(user.getU_email())) return false;
+        if (getuID() != user.getuID()) return false;
+        if (!getuUserName().equals(user.getuUserName())) return false;
+        if (!getuFirstName().equals(user.getuFirstName())) return false;
+        if (!getuLastName().equals(user.getuLastName())) return false;
+        if (!getuEmail().equals(user.getuEmail())) return false;
 
-        return getU_role().equals(user.getU_role());
+        return getuRole().equals(user.getuRole());
     }
 
     @Override
     public int hashCode() {
-        int result = getU_id();
-        result = 31 * result + getU_username().hashCode();
-        result = 31 * result + getU_firstname().hashCode();
-        result = 31 * result + getU_lastname().hashCode();
-        result = 31 * result + getU_email().hashCode();
-        result = 31 * result + getU_role().hashCode();
+        int result = getuID();
+        result = 31 * result + getuUserName().hashCode();
+        result = 31 * result + getuFirstName().hashCode();
+        result = 31 * result + getuLastName().hashCode();
+        result = 31 * result + getuEmail().hashCode();
+        result = 31 * result + getuRole().hashCode();
         return result;
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "u_id=" + u_id +
-                ", u_username='" + u_username + '\'' +
-                ", u_firstname='" + u_firstname + '\'' +
-                ", u_lastname='" + u_lastname + '\'' +
-                ", u_email='" + u_email + '\'' +
-                ", u_role=" + u_role +
+                "uID=" + uID +
+                ", uUserName='" + uUserName + '\'' +
+                ", uFirstName='" + uFirstName + '\'' +
+                ", uLastName='" + uLastName + '\'' +
+                ", uEmail='" + uEmail + '\'' +
+                ", uRole=" + uRole +
                 '}';
     }
 }
