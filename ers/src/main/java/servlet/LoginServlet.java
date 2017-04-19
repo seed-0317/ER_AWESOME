@@ -19,13 +19,17 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("Index.html").forward(request,response);
+        request.getRequestDispatcher("index.html").forward(request,response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         UserDao dao = DaoUtilities.getUserDao();
+
+        String name = request.getParameter("username");
+        User user = dao.getUser(name);
+
         String name = request.getParameter("name");
 
         BusinessLogicLogin bllogin = new BusinessLogicLogin();
@@ -36,12 +40,6 @@ public class LoginServlet extends HttpServlet {
 
         User user = dao.getUser(name);
 
-     /*   String email = (String) user.getuEmail();
-        String username = (String) user.getuUserName();
-        String firstname = (String) user.getuFirstName();
-        String lastname = (String) user.getuLastName();*/
-
-
         if(user.getuUserName() == null) {
             // user does not exist in database
             response.sendRedirect("login");
@@ -49,12 +47,6 @@ public class LoginServlet extends HttpServlet {
         } else {
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
-
-
-           /* session.setAttribute("username", username);
-            session.setAttribute("email", email);
-            session.setAttribute("firstname", firstname);
-            session.setAttribute("lastname", lastname);*/
 
             response.sendRedirect("UpdatePersonalData");
         }
