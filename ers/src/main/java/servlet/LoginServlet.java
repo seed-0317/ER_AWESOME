@@ -3,6 +3,7 @@ package servlet;
 import dao.DaoUtilities;
 import dao.UserDao;
 import model.User;
+import service.BusinessLogicLogin;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,6 +27,13 @@ public class LoginServlet extends HttpServlet {
 
         UserDao dao = DaoUtilities.getUserDao();
         String name = request.getParameter("name");
+
+        BusinessLogicLogin bllogin = new BusinessLogicLogin();
+        if (!bllogin.usernameValid1(name)){
+            //username input incorrect
+            response.sendRedirect("login");
+        }
+
         User user = dao.getUser(name);
 
      /*   String email = (String) user.getuEmail();
@@ -33,7 +41,9 @@ public class LoginServlet extends HttpServlet {
         String firstname = (String) user.getuFirstName();
         String lastname = (String) user.getuLastName();*/
 
+
         if(user.getuUserName() == null) {
+            // user does not exist in database
             response.sendRedirect("login");
 
         } else {
@@ -45,8 +55,6 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("email", email);
             session.setAttribute("firstname", firstname);
             session.setAttribute("lastname", lastname);*/
-
-
 
             response.sendRedirect("UpdatePersonalData");
         }
