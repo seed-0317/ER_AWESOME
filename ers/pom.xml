@@ -76,6 +76,7 @@
         <sonar.test.exclusions>**/*Test.java,**/*Test.class</sonar.test.exclusions>
     </properties>
 
+
     <!-- Cobertura plugin for test coverage -->
     <plugin>
         <groupId>org.codehaus.mojo</groupId>

@@ -73,7 +73,7 @@
  </div>
 
     <div class = "lower">
-    <div class ="form inline">
+    <form class ="form inline" action="SubmitReimbursementServlet" method = "post">
         <h2><u>New Expense Submission</u></h2>
         <!--<div class="col-md-1">-->
           <!--<label for="rid">Request ID</label>-->
@@ -99,14 +99,15 @@
             <div class="col-md-2">
                 <label for="author">Submitted by</label>
                 <input class="form-control" id="author" type="text" value="${user.uFirstName}">
-        <br />
-        <div class="col-md-2">
-            <div class ="form-group">
-            <button type="submit" class="btn" value="Login">Submit</button>
             </div>
+        <br />
+            <div class="col-md-2">
+            <!--<div class ="form-group">
+            <button type="submit" class="btn" value="Login">Submit</button>
+            </div> !-->
         </div>
         </div>
-</div>
-</div>
+    </form>
+    </div>
 </body>
 </html>
