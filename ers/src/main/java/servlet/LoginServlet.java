@@ -3,6 +3,7 @@ package servlet;
 import dao.DaoUtilities;
 import dao.UserDao;
 import model.User;
+import service.BusinessLogicLogin;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,10 +26,22 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         UserDao dao = DaoUtilities.getUserDao();
+
         String name = request.getParameter("username");
         User user = dao.getUser(name);
 
+        String name = request.getParameter("name");
+
+        BusinessLogicLogin bllogin = new BusinessLogicLogin();
+        if (!bllogin.usernameValid1(name)){
+            //username input incorrect
+            response.sendRedirect("login");
+        }
+
+        User user = dao.getUser(name);
+
         if(user.getuUserName() == null) {
+            // user does not exist in database
             response.sendRedirect("login");
 
         } else {
