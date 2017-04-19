@@ -35,6 +35,12 @@ public class DaoUtilities {
 
     public static Connection getConnection() {
 
+        try {
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
         Connection connection = null;
         try {
             connection = DriverManager.getConnection(URL, CONNECTION_USERNAME, CONNECTION_PASSWORD);
