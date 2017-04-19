@@ -26,11 +26,12 @@ public class ExpenseDaoImpl implements ExpenseDao{
 
         try {
             connection = DaoUtilities.getConnection();
-            String sql =  "SELECT a.*, b.u_id as author_id, b.u_username as authorname,";
+            String sql =  "SELECT a.r_id, a.r_amount, a.r_description, a.r_submitted, a.r_resolved,";
+            sql = sql + "  b.u_id as author_id, b.u_username as authorname,";
             sql = sql + "  c.u_id as resolver_id, c.u_username as resolvername, d.rs_id, d.rs_status, e.rt_id, e.rt_type";
             sql = sql + "  from erawesome.ers_reimbursements a";
             sql = sql + "  join erawesome.ers_users b on b.u_id = a.u_id_author";
-            sql = sql + "  join erawesome.ers_users c on c.u_id = a.u_id_resolver";
+            sql = sql + "  left join erawesome.ers_users c on c.u_id = a.u_id_resolver";
             sql = sql + "  join erawesome.ers_reimbursement_status d on d.rs_id = a.rt_status";
             sql = sql + "  join erawesome.ers_reimbursement_type e on e.rt_id = a.rt_type";
 
@@ -100,7 +101,7 @@ public class ExpenseDaoImpl implements ExpenseDao{
         try{
             connection = DaoUtilities.getConnection();
             String sql =  "INSERT Into erawesome.ers_reimbursements ( r_amount, r_description, r_submitted , ";
-            sql = sql + "  r_resolved, r_id_author , u_id_resolver, rt_type, rt_status) ";
+            sql = sql + "  r_resolved, u_id_author , u_id_resolver, rt_type, rt_status) ";
             sql = sql + "  VALUES (?,?,?,?,?,?,?,? ) ";
 
             stmt = connection.prepareStatement(sql);
@@ -111,7 +112,15 @@ public class ExpenseDaoImpl implements ExpenseDao{
             stmt.setTimestamp(3, reimb.getR_submitted());
             stmt.setTimestamp(4, reimb.getR_resolved());
             stmt.setInt(5, reimb.getU_author().getU_id());
-            stmt.setInt(6, reimb.getU_resolver().getU_id());
+
+            int r = reimb.getU_resolver().getU_id();
+            if (r !=0){
+                stmt.setInt(6, r);
+            }
+            else {
+                stmt.setNull(6, java.sql.Types.INTEGER );
+            }
+
             stmt.setInt(7, reimb.getR_type().getRt_id());
             stmt.setInt(8, reimb.getR_status().getRs_id());
 
