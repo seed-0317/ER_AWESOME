@@ -85,17 +85,20 @@
             <input class="form-control" id="amount" type="text" placeholder="$0.00">
         </div>
         <div class="col-md-3">
-            <label for="expdesc">Expense Description</label>
-            <input class="form-control" id="expdesc" type="text" placeholder="Reason for Expense">
+            <label for="description">Expense Description</label>
+            <input class="form-control" id="description" type="text" placeholder="Reason for Expense">
         </div>
         <div class="col-md-2">
-            <label for="datesub">Date submitted</label>
-            <input class="form-control" id="datesub" type="text" placeholder="1/1/2017">
+            <label for="submitted">Date submitted</label>
+            <input class="form-control" id="submitted" type="text" placeholder="1/1/2017">
         </div>
         <div class="col-md-2"> <!--this needs to be dropdown>-->
             <label for="type">Expense Type</label>
             <input class="form-control" id="type" type="text" placeholder="Meals">
         </div>
+            <div class="col-md-2">
+                <label for="author">Submitted by</label>
+                <input class="form-control" id="author" type="text" value="${user.u_firstname}">
         <br />
         <div class="col-md-2">
             <div class ="form-group">
@@ -103,10 +106,6 @@
             </div>
         </div>
         </div>
-        <!--<div class="col-md-2">
-            <!--<label for="username">Submitter</label>-->
-            <!--<input class="form-control" id="username" type="text" placeholder="Jane Doe">-->
-        <!--</div>-->
 </div>
 </div>
 </body>
