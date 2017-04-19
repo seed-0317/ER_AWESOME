@@ -24,14 +24,29 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         UserDao dao = DaoUtilities.getUserDao();
-        String username = request.getParameter("name");
-        User user = dao.getUser(username);
+        String name = request.getParameter("name");
+        User user = dao.getUser(name);
 
-        if(user == null) {
+     /*   String email = (String) user.getU_email();
+        String username = (String) user.getU_username();
+        String firstname = (String) user.getU_firstname();
+        String lastname = (String) user.getU_lastname();*/
+
+        if(user.getU_username() == null) {
             response.sendRedirect("login");
+
         } else {
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
+
+
+           /* session.setAttribute("username", username);
+            session.setAttribute("email", email);
+            session.setAttribute("firstname", firstname);
+            session.setAttribute("lastname", lastname);*/
+
+
+
             response.sendRedirect("UpdatePersonalData");
         }
 

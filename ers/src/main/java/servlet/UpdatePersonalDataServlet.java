@@ -22,7 +22,13 @@ public class UpdatePersonalDataServlet extends HttpServlet{
 
 
         HttpSession session = req.getSession();
-        String var = (String) session.getAttribute("user");
+       /* String username = (String) session.getAttribute("username");
+        String lastname = (String) session.getAttribute("lastname");
+        String firstname = (String) session.getAttribute("firstname");
+        String email = (String) session.getAttribute("email");
+*/
+
+       User user = (User) session.getAttribute("user");
 
         req.getRequestDispatcher("empInfo.html").forward(req,resp);
 
