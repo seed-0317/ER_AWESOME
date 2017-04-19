@@ -28,12 +28,12 @@ public class LoginServlet extends HttpServlet {
         String name = request.getParameter("name");
         User user = dao.getUser(name);
 
-     /*   String email = (String) user.getU_email();
-        String username = (String) user.getU_username();
-        String firstname = (String) user.getU_firstname();
-        String lastname = (String) user.getU_lastname();*/
+     /*   String email = (String) user.getuEmail();
+        String username = (String) user.getuUserName();
+        String firstname = (String) user.getuFirstName();
+        String lastname = (String) user.getuLastName();*/
 
-        if(user.getU_username() == null) {
+        if(user.getuUserName() == null) {
             response.sendRedirect("login");
 
         } else {

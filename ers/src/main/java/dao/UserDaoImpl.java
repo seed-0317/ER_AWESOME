@@ -12,7 +12,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class UserDaoImpl implements UserDao {
 
@@ -34,15 +33,15 @@ public class UserDaoImpl implements UserDao {
             while (rs.next()) {
                 User u = new User();
 
-                u.setU_id(rs.getInt("u_id"));
-                u.setU_username(rs.getString("u_username"));
-                u.setU_firstname(rs.getString("u_firstname"));
-                u.setU_lastname(rs.getString("u_lastname"));
-                u.setU_email(rs.getString("u_email"));
+                u.setuID(rs.getInt("u_id"));
+                u.setuUserName(rs.getString("u_username"));
+                u.setuFirstName(rs.getString("u_firstname"));
+                u.setuLastName(rs.getString("u_lastname"));
+                u.setuEmail(rs.getString("u_email"));
                 UserRoles r = new UserRoles();
-                r.setUr_id(rs.getInt("ur_id"));
-                r.setUr_role(rs.getString("ur_role"));
-                u.setU_role(r);
+                r.setUrId(rs.getInt("ur_id"));
+                r.setUrRole(rs.getString("ur_role"));
+                u.setuRole(r);
 
                 users.add(u);
             }
@@ -82,12 +81,12 @@ public class UserDaoImpl implements UserDao {
             stmt = connection.prepareStatement(sql);
 
 
-            stmt.setString(1, emp.getU_username());
-            stmt.setString(2, emp.getU_firstname());
-            stmt.setString(3, emp.getU_lastname());
-            stmt.setString(4, emp.getU_email());
-            stmt.setInt(5, emp.getU_role().getUr_id());
-            stmt.setInt(6, emp.getU_id());
+            stmt.setString(1, emp.getuUserName());
+            stmt.setString(2, emp.getuFirstName());
+            stmt.setString(3, emp.getuLastName());
+            stmt.setString(4, emp.getuEmail());
+            stmt.setInt(5, emp.getuRole().getUrId());
+            stmt.setInt(6, emp.getuID());
 
             success = stmt.executeUpdate();
 
@@ -135,15 +134,15 @@ public class UserDaoImpl implements UserDao {
             while (rs.next()) {
 
 
-                u.setU_id(rs.getInt("u_id"));
-                u.setU_username(rs.getString("u_username"));
-                u.setU_firstname(rs.getString("u_firstname"));
-                u.setU_lastname(rs.getString("u_lastname"));
-                u.setU_email(rs.getString("u_email"));
+                u.setuID(rs.getInt("u_id"));
+                u.setuUserName(rs.getString("u_username"));
+                u.setuFirstName(rs.getString("u_firstname"));
+                u.setuLastName(rs.getString("u_lastname"));
+                u.setuEmail(rs.getString("u_email"));
                 UserRoles r = new UserRoles();
-                r.setUr_id(rs.getInt("ur_id"));
-                r.setUr_role(rs.getString("ur_role"));
-                u.setU_role(r);
+                r.setUrId(rs.getInt("ur_id"));
+                r.setUrRole(rs.getString("ur_role"));
+                u.setuRole(r);
             }
 
         }

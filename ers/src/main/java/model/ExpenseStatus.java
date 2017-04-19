@@ -2,31 +2,31 @@ package model;
 
 public class ExpenseStatus {
 
-    private int rs_id;
-    private String rs_status;
+    private int rsId;
+    private String rsStatus;
 
-    public ExpenseStatus(int rs_id, String rs_status) {
-        this.rs_id = rs_id;
-        this.rs_status = rs_status;
+    public ExpenseStatus(int rsId, String rs_status) {
+        this.rsId = rsId;
+        this.rsStatus = rs_status;
     }
 
     public ExpenseStatus() {
     }
 
-    public int getRs_id() {
-        return rs_id;
+    public int getRsId() {
+        return rsId;
     }
 
-    public void setRs_id(int rs_id) {
-        this.rs_id = rs_id;
+    public void setRsId(int rsId) {
+        this.rsId = rsId;
     }
 
-    public String getRs_status() {
-        return rs_status;
+    public String getRsStatus() {
+        return rsStatus;
     }
 
-    public void setRs_status(String rs_status) {
-        this.rs_status = rs_status;
+    public void setRsStatus(String rsStatus) {
+        this.rsStatus = rsStatus;
     }
 
 
@@ -37,22 +37,22 @@ public class ExpenseStatus {
 
         ExpenseStatus that = (ExpenseStatus) o;
 
-        if (getRs_id() != that.getRs_id()) return false;
-        return getRs_status().equals(that.getRs_status());
+        if (getRsId() != that.getRsId()) return false;
+        return getRsStatus().equals(that.getRsStatus());
     }
 
     @Override
     public int hashCode() {
-        int result = getRs_id();
-        result = 31 * result + getRs_status().hashCode();
+        int result = getRsId();
+        result = 31 * result + getRsStatus().hashCode();
         return result;
     }
 
     @Override
     public String toString() {
         return "ExpenseStatus{" +
-                "rs_id=" + rs_id +
-                ", rs_status='" + rs_status + '\'' +
+                "rsId=" + rsId +
+                ", rsStatus='" + rsStatus + '\'' +
                 '}';
     }
 }

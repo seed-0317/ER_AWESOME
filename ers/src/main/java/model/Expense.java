@@ -4,90 +4,90 @@ import java.sql.Timestamp;
 
 public class Expense {
 
-    private int r_id;
-    private double r_amount;
-    private String r_description;
-    private Timestamp r_submitted;
-    private Timestamp r_resolved;
-    private User u_author;
-    private User u_resolver;
-    private ExpenseType r_type;
-    private ExpenseStatus r_status;
+    private int rId;
+    private double rAmount;
+    private String rDescription;
+    private Timestamp rSubmitted;
+    private Timestamp rResolved;
+    private User uAuthor;
+    private User uResolver;
+    private ExpenseType rType;
+    private ExpenseStatus rStatus;
 
     public Expense() {
     }
 
 
-    public int getR_id() {
-        return r_id;
+    public int getrId() {
+        return rId;
     }
 
-    public void setR_id(int r_id) {
-        this.r_id = r_id;
+    public void setrId(int rId) {
+        this.rId = rId;
     }
 
-    public double getR_amount() {
-        return r_amount;
+    public double getrAmount() {
+        return rAmount;
     }
 
-    public void setR_amount(double r_amount) {
-        this.r_amount = r_amount;
+    public void setrAmount(double rAmount) {
+        this.rAmount = rAmount;
     }
 
-    public String getR_description() {
-        return r_description;
+    public String getrDescription() {
+        return rDescription;
     }
 
-    public void setR_description(String r_description) {
-        this.r_description = r_description;
+    public void setrDescription(String rDescription) {
+        this.rDescription = rDescription;
     }
 
-    public Timestamp getR_submitted() {
-        return r_submitted;
+    public Timestamp getrSubmitted() {
+        return rSubmitted;
     }
 
-    public void setR_submitted(Timestamp r_submitted) {
-        this.r_submitted = r_submitted;
+    public void setrSubmitted(Timestamp rSubmitted) {
+        this.rSubmitted = rSubmitted;
     }
 
-    public Timestamp getR_resolved() {
-        return r_resolved;
+    public Timestamp getrResolved() {
+        return rResolved;
     }
 
-    public void setR_resolved(Timestamp r_resolved) {
-        this.r_resolved = r_resolved;
+    public void setrResolved(Timestamp rResolved) {
+        this.rResolved = rResolved;
     }
 
-    public User getU_author() {
-        return u_author;
+    public User getuAuthor() {
+        return uAuthor;
     }
 
-    public void setU_author(User u_author) {
-        this.u_author = u_author;
+    public void setuAuthor(User uAuthor) {
+        this.uAuthor = uAuthor;
     }
 
-    public User getU_resolver() {
-        return u_resolver;
+    public User getuResolver() {
+        return uResolver;
     }
 
-    public void setU_resolver(User u_resolver) {
-        this.u_resolver = u_resolver;
+    public void setuResolver(User uResolver) {
+        this.uResolver = uResolver;
     }
 
-    public ExpenseType getR_type() {
-        return r_type;
+    public ExpenseType getrType() {
+        return rType;
     }
 
-    public void setR_type(ExpenseType r_type) {
-        this.r_type = r_type;
+    public void setrType(ExpenseType rType) {
+        this.rType = rType;
     }
 
-    public ExpenseStatus getR_status() {
-        return r_status;
+    public ExpenseStatus getrStatus() {
+        return rStatus;
     }
 
-    public void setR_status(ExpenseStatus r_status) {
-        this.r_status = r_status;
+    public void setrStatus(ExpenseStatus rStatus) {
+        this.rStatus = rStatus;
     }
 
     @Override
@@ -97,46 +97,46 @@ public class Expense {
 
         Expense expense = (Expense) o;
 
-        if (getR_id() != expense.getR_id()) return false;
-        if (Double.compare(expense.getR_amount(), getR_amount()) != 0) return false;
-        if (!getR_description().equals(expense.getR_description())) return false;
-        if (!getR_submitted().equals(expense.getR_submitted())) return false;
-        if (!getR_resolved().equals(expense.getR_resolved())) return false;
-        if (!getU_author().equals(expense.getU_author())) return false;
-        if (!getU_resolver().equals(expense.getU_resolver())) return false;
-        if (!getR_type().equals(expense.getR_type())) return false;
-        return getR_status().equals(expense.getR_status());
+        if (getrId() != expense.getrId()) return false;
+        if (Double.compare(expense.getrAmount(), getrAmount()) != 0) return false;
+        if (!getrDescription().equals(expense.getrDescription())) return false;
+        if (!getrSubmitted().equals(expense.getrSubmitted())) return false;
+        if (!getrResolved().equals(expense.getrResolved())) return false;
+        if (!getuAuthor().equals(expense.getuAuthor())) return false;
+        if (!getuResolver().equals(expense.getuResolver())) return false;
+        if (!getrType().equals(expense.getrType())) return false;
+        return getrStatus().equals(expense.getrStatus());
     }
 
     @Override
     public int hashCode() {
         int result;
         long temp;
-        result = getR_id();
-        temp = Double.doubleToLongBits(getR_amount());
+        result = getrId();
+        temp = Double.doubleToLongBits(getrAmount());
         result = 31 * result + (int) (temp ^ (temp >>> 32));
-        result = 31 * result + getR_description().hashCode();
-        result = 31 * result + getR_submitted().hashCode();
-        result = 31 * result + getR_resolved().hashCode();
-        result = 31 * result + getU_author().hashCode();
-        result = 31 * result + getU_resolver().hashCode();
-        result = 31 * result + getR_type().hashCode();
-        result = 31 * result + getR_status().hashCode();
+        result = 31 * result + getrDescription().hashCode();
+        result = 31 * result + getrSubmitted().hashCode();
+        result = 31 * result + getrResolved().hashCode();
+        result = 31 * result + getuAuthor().hashCode();
+        result = 31 * result + getuResolver().hashCode();
+        result = 31 * result + getrType().hashCode();
+        result = 31 * result + getrStatus().hashCode();
         return result;
     }
 
     @Override
     public String toString() {
         return "Expense{" +
-                "r_id=" + r_id +
-                ", r_amount=" + r_amount +
-                ", r_description='" + r_description + '\'' +
-                ", r_submitted=" + r_submitted +
-                ", r_resolved=" + r_resolved +
-                ", u_author=" + u_author +
-                ", u_resolver=" + u_resolver +
-                ", r_type=" + r_type +
-                ", r_status=" + r_status +
+                "rId=" + rId +
+                ", rAmount=" + rAmount +
+                ", rDescription='" + rDescription + '\'' +
+                ", rSubmitted=" + rSubmitted +
+                ", rResolved=" + rResolved +
+                ", uAuthor=" + uAuthor +
+                ", uResolver=" + uResolver +
+                ", rType=" + rType +
+                ", rStatus=" + rStatus +
                 '}';
     }
 }

@@ -2,31 +2,31 @@ package model;
 
 public class ExpenseType {
 
-    private int rt_id;
-    private String rt_type;
+    private int rtId;
+    private String rtType;
 
-    public ExpenseType(int rt_id, String rt_type) {
-        this.rt_id = rt_id;
-        this.rt_type = rt_type;
+    public ExpenseType(int rtId, String rtType) {
+        this.rtId = rtId;
+        this.rtType = rtType;
     }
 
     public ExpenseType() {
     }
 
-    public int getRt_id() {
-        return rt_id;
+    public int getRtId() {
+        return rtId;
     }
 
-    public void setRt_id(int rt_id) {
-        this.rt_id = rt_id;
+    public void setRtId(int rtId) {
+        this.rtId = rtId;
     }
 
-    public String getRt_type() {
-        return rt_type;
+    public String getRtType() {
+        return rtType;
     }
 
-    public void setRt_type(String rt_type) {
-        this.rt_type = rt_type;
+    public void setRtType(String rtType) {
+        this.rtType = rtType;
     }
 
     @Override
@@ -36,22 +36,22 @@ public class ExpenseType {
 
         ExpenseType that = (ExpenseType) o;
 
-        if (getRt_id() != that.getRt_id()) return false;
-        return getRt_type().equals(that.getRt_type());
+        if (getRtId() != that.getRtId()) return false;
+        return getRtType().equals(that.getRtType());
     }
 
     @Override
     public int hashCode() {
-        int result = getRt_id();
-        result = 31 * result + getRt_type().hashCode();
+        int result = getRtId();
+        result = 31 * result + getRtType().hashCode();
         return result;
     }
 
     @Override
     public String toString() {
         return "ExpenseType{" +
-                "rt_id=" + rt_id +
-                ", rt_type='" + rt_type + '\'' +
+                "rtId=" + rtId +
+                ", rtType='" + rtType + '\'' +
                 '}';
     }
 }
