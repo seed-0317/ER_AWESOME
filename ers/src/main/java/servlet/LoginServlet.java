@@ -28,17 +28,14 @@ public class LoginServlet extends HttpServlet {
         UserDao dao = DaoUtilities.getUserDao();
 
         String name = request.getParameter("username");
-        User user = dao.getUser(name);
-
-        //Amanda code to catch submission errors pre dao call
-        name = request.getParameter("name");
 
         BusinessLogicLogin bllogin = new BusinessLogicLogin();
         if (!bllogin.usernameValid1(name)){
             //username input incorrect
             response.sendRedirect("login");
         }
-        //
+
+        User user = dao.getUser(name);
 
         if(user.getuUserName() == null) {
             // user does not exist in database
