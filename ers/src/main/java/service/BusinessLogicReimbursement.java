@@ -72,7 +72,5 @@ public class BusinessLogicReimbursement {
      * @param user to be updated by id
      * @return updated user object
      */
-   // public User ReimbursementCall (User user1){
-     //   return null;
-    //}
+ //can do if have time - this is represented in submitreimbursementservlet now
 }

@@ -4,6 +4,7 @@ import dao.DaoUtilities;
 import dao.UserDao;
 import dao.UserDaoImpl;
 import model.User;
+import service.BusinessLogicUserInfo;
 
 import javax.servlet.http.HttpServlet;
 
@@ -40,6 +41,31 @@ public class UpdatePersonalDataServlet extends HttpServlet{
         String firstname = req.getParameter("firstname");
         String lastname = req.getParameter("lastname");
         String email = req.getParameter("email");
+
+        //Amanda code to catch submission errors pre dao call
+        BusinessLogicUserInfo bluserinfo = new BusinessLogicUserInfo();
+        if (!bluserinfo.usernameValid(username)){
+            //amount input incorrect
+            resp.sendRedirect("UpdatePersonalData");
+        }
+
+        BusinessLogicUserInfo bluserinfo1 = new BusinessLogicUserInfo();
+        if (!bluserinfo1.firstNameValid(firstname)){
+            //description input incorrect
+            resp.sendRedirect("UpdatePersonalData");
+        }
+
+        BusinessLogicUserInfo bluserinfo2 = new BusinessLogicUserInfo();
+        if (!bluserinfo2.lastNameValid(lastname)){
+            //author input incorrect
+            resp.sendRedirect("UpdatePersonalData");
+        }
+        BusinessLogicUserInfo bluserinfo3 = new BusinessLogicUserInfo();
+        if (!bluserinfo3.emailValid(email)){
+            //author input incorrect
+            resp.sendRedirect("UpdatePersonalData");
+        }
+        //
 
         User user = (User) session.getAttribute("user");
         user.setuEmail(email);
