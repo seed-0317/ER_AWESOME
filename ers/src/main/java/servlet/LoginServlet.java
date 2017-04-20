@@ -30,6 +30,7 @@ public class LoginServlet extends HttpServlet {
         String name = request.getParameter("username");
         User user = dao.getUser(name);
 
+        //Amanda code to catch submission errors pre dao call
         name = request.getParameter("name");
 
         BusinessLogicLogin bllogin = new BusinessLogicLogin();
@@ -37,6 +38,7 @@ public class LoginServlet extends HttpServlet {
             //username input incorrect
             response.sendRedirect("login");
         }
+        //
 
         if(user.getuUserName() == null) {
             // user does not exist in database
