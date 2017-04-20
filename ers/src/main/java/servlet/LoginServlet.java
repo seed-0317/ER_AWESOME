@@ -30,15 +30,13 @@ public class LoginServlet extends HttpServlet {
         String name = request.getParameter("username");
         User user = dao.getUser(name);
 
-        String name = request.getParameter("name");
+        name = request.getParameter("name");
 
         BusinessLogicLogin bllogin = new BusinessLogicLogin();
         if (!bllogin.usernameValid1(name)){
             //username input incorrect
             response.sendRedirect("login");
         }
-
-        User user = dao.getUser(name);
 
         if(user.getuUserName() == null) {
             // user does not exist in database

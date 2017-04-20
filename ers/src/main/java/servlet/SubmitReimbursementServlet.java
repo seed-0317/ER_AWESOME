@@ -7,6 +7,7 @@ import model.Expense;
 import model.ExpenseStatus;
 import model.ExpenseType;
 import model.User;
+import service.BusinessLogicReimbursement;
 
 import javax.servlet.http.HttpServlet;
 
@@ -37,6 +38,26 @@ public class SubmitReimbursementServlet extends HttpServlet {
         String utype = req.getParameter("type");
         String uauthor = req.getParameter("author");
 
+        //Amanda code to catch submission errors pre dao call
+        BusinessLogicReimbursement blreimbursement = new BusinessLogicReimbursement();
+        if (!blreimbursement.amountValid(amount)){
+            //amount input incorrect
+            resp.sendRedirect("SubmitReimbursementServlet");
+        }
+
+        BusinessLogicReimbursement blreimbursement1 = new BusinessLogicReimbursement();
+        if (!blreimbursement1.descriptionValid(description)){
+            //description input incorrect
+            resp.sendRedirect("SubmitReimbursementServlet");
+        }
+
+        BusinessLogicReimbursement blreimbursement2 = new BusinessLogicReimbursement();
+        if (!blreimbursement2.authorValid(uauthor)){
+            //author input incorrect
+            resp.sendRedirect("SubmitReimbursementServlet");
+        }
+        //
+        //ask team about author (auto-populated or open text field?)
         User currUser = new User();
         currUser.setuUserName(uauthor);
 
