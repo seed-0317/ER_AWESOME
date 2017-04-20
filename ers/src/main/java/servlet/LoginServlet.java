@@ -34,18 +34,25 @@ public class LoginServlet extends HttpServlet {
             //username input incorrect
             response.sendRedirect("login");
         }
-        else {
-            User user = dao.getUser(name);
-            if (user.getuUserName() == null) {
-                // user does not exist in database
-                response.sendRedirect("login");
 
-            } else {
-                HttpSession session = request.getSession();
-                session.setAttribute("user", user);
+        else
+        {
+        User user = dao.getUser(name);
+        if(user.getuUserName() == null) {
+            // user does not exist in database
+            response.sendRedirect("login");
 
-                response.sendRedirect("UpdatePersonalData");
+        } else {
+            HttpSession session = request.getSession();
+            session.setAttribute("user", user);
+
+            if (user.getuRole().getUrRole().equals("MANAGER")) {
+                response.sendRedirect("mgrHome.html");
             }
+            else {
+                response.sendRedirect("expenseSubmit.html");
+            }
+
         }
     }
 }
