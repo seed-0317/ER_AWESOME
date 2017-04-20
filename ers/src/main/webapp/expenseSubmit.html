@@ -15,15 +15,16 @@
 
     .upper {
     top: 5%;
-    height: 65%;
-    background-color: white;
+    height: 20%;
+    background-color: lavender;
     overflow:scroll;
     }
 
     .lower {
+    top: 25%;
     bottom: 0;
-    height: 25%;
-    background-color: antiquewhite;
+    height: 75%;
+    background-color: white;
     }
     </style>
 </head>
@@ -39,46 +40,57 @@
     <hr />
 </div>
 
- <div class="upper">
+ <div class="lower">
      <h2><u>Previous Expense Submissions</u></h2>
     <table class="table table-striped">
         <thead class="table-bordered">
             <tr>
             <th class="col-md-1">Request ID</th>
             <th class="col-md-1">Amount</th>
-            <th class="col-md-2">Expense Description</th>
+            <th class="col-md-3">Expense Description</th>
             <th class="col-md-1">Date Submitted</th>
             <th class="col-md-1">Date Resolved</th>
-            <th class="col-md-2">Type</th>
-            <th class="col-md-1">Status</th>
+            <th class="col-md-1">Type</th>
+            <th class="col-md-1">Expense Status</th>
             <th class="col-md-1">Expense Submitter</th>
-            <th class="col-md-1">Resolver</th>
+            <th class="col-md-1">Expense Resolver</th>
             </tr>
-                </thead>
-<!--This is just dummy data for now-->
+        </thead>
         <tbody>
-            <tr>
-                <td>1</td>
-                <td>27.99</td>
-                <td>Meal for Client</td>
-                <td>3/31/17 10:00:00</td>
-                <td>4/17/17 10:00:00</td>
-                <td>Meals</td>
-                <td>Resolved</td>
-                <td>Mr.Employee</td>
-                <td>Mr.Big</td>
-            </tr>
+        <tr>
+        <#list expenses as expenses>
+            <td class="col-md-1">${rid}</td>
+            <td class="col-md-1">${amount}</td>
+            <td class="col-md-3">${description}</td>
+            <td class="col-md-1">${submitted}</td>
+            <td class="col-md-1">${resolved}</td>
+            <td class="col-md-1">${type}</td>
+            <td class="col-md-1">${status}</td>
+            <td class="col-md-1">${submitter}</td>
+            <td class="col-md-1">${resolver}</td>
+        </#list>
+        </tr>
+<!--This is just dummy data for now-->
+        <!--<tbody>-->
+            <!--<tr>-->
+                <!--<td>1</td>-->
+                <!--<td>27.99</td>-->
+                <!--<td>Meal for Client</td>-->
+                <!--<td>3/31/17 10:00:00</td>-->
+                <!--<td>4/17/17 10:00:00</td>-->
+                <!--<td>Meals</td>-->
+                <!--<td>Resolved</td>-->
+                <!--<td>Mr.Employee</td>-->
+                <!--<td>Mr.Big</td>-->
+            <!--</tr>-->
+            <!---->
         </tbody>
     </table>
  </div>
 
-    <div class = "lower">
+    <div class = "upper">
     <form class ="form inline" action="SubmitReimbursementServlet" method = "post">
         <h2><u>New Expense Submission</u></h2>
-        <!--<div class="col-md-1">-->
-          <!--<label for="rid">Request ID</label>-->
-            <!--<input class="form-control" id="rid" type="text" placeholder="100">-->
-        <!--</div>-->
         <div class = "row">
         <div class="col-md-1">
             <label for="amount">Amount</label>
@@ -102,9 +114,9 @@
             </div>
         <br />
             <div class="col-md-2">
-            <!--<div class ="form-group">
+            <div class ="form-group">
             <button type="submit" class="btn" value="Login">Submit</button>
-            </div> !-->
+            </div>
         </div>
         </div>
     </form>
