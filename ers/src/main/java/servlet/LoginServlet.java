@@ -48,7 +48,7 @@ public class LoginServlet extends HttpServlet {
                 response.sendRedirect("mgrHome.html");
             }
             else {
-                response.sendRedirect("empHome.html");
+                response.sendRedirect("expenseSubmit.html");
             }
 
         }

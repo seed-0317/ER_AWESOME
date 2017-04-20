@@ -20,4 +20,10 @@ import java.io.IOException;
         req.getSession().invalidate();
         resp.sendRedirect("login");
     }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+        req.getSession().invalidate();
+        resp.sendRedirect("login");
+    }
 }
