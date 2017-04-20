@@ -49,36 +49,35 @@ public class UpdatePersonalDataServlet extends HttpServlet{
             resp.sendRedirect("UpdatePersonalData");
         }
 
-        BusinessLogicUserInfo bluserinfo1 = new BusinessLogicUserInfo();
-        if (!bluserinfo1.firstNameValid(firstname)){
+        else if (!bluserinfo.firstNameValid(firstname)){
             //description input incorrect
             resp.sendRedirect("UpdatePersonalData");
         }
 
-        BusinessLogicUserInfo bluserinfo2 = new BusinessLogicUserInfo();
-        if (!bluserinfo2.lastNameValid(lastname)){
+        else if (!bluserinfo.lastNameValid(lastname)){
             //author input incorrect
             resp.sendRedirect("UpdatePersonalData");
         }
-        BusinessLogicUserInfo bluserinfo3 = new BusinessLogicUserInfo();
-        if (!bluserinfo3.emailValid(email)){
-            //author input incorrect
-            resp.sendRedirect("UpdatePersonalData");
-        }
+
+        else if
+            (!bluserinfo.emailValid(email)) {
+                //author input incorrect
+                resp.sendRedirect("UpdatePersonalData");
+            }
         //
+        else {
+            User user = (User) session.getAttribute("user");
+            user.setuEmail(email);
+            user.setuFirstName(firstname);
+            user.setuLastName(lastname);
+            user.setuUserName(username);
 
-        User user = (User) session.getAttribute("user");
-        user.setuEmail(email);
-        user.setuFirstName(firstname);
-        user.setuLastName(lastname);
-        user.setuUserName(username);
+            UserDaoImpl dao = new UserDaoImpl();
+            dao.updateEmployee(user);
 
-        UserDaoImpl dao = new UserDaoImpl();
-        dao.updateEmployee(user);
+            session.setAttribute("user", user);
 
-        session.setAttribute("user", user);
-
-       resp.sendRedirect("UpdatePersonalData");
-
+            resp.sendRedirect("UpdatePersonalData");
+        }
     }
 }

@@ -35,6 +35,8 @@ public class LoginServlet extends HttpServlet {
             response.sendRedirect("login");
         }
 
+        else
+        {
         User user = dao.getUser(name);
         if(user.getuUserName() == null) {
             // user does not exist in database
@@ -52,6 +54,5 @@ public class LoginServlet extends HttpServlet {
             }
 
         }
-
     }
 }
