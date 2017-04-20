@@ -44,7 +44,13 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
 
-            response.sendRedirect("UpdatePersonalData");
+            if (user.getuRole().getUrRole().equals("MANAGER")) {
+                response.sendRedirect("mgrHome.html");
+            }
+            else {
+                response.sendRedirect("empHome.html");
+            }
+
         }
 
     }
