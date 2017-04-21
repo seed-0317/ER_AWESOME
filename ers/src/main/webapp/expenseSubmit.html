@@ -57,7 +57,7 @@
             </tr>
         </thead>
         <tbody>
-        <tr>
+        <div class = "row">
         <#list expenses as expense>
             <td class="col-md-1">${expense.rid}</td>
             <td class="col-md-1">${expense.amount}</td>
@@ -69,7 +69,7 @@
             <td class="col-md-1">${expense.submitter}</td>
             <td class="col-md-1">${expense.resolver}</td>
         </#list>
-        </tr>
+        </div>
 <!--This is just dummy data for now-->
         <!--<tbody>-->
             <!--<tr>-->
