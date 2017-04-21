@@ -32,7 +32,7 @@ public class LoginServlet extends HttpServlet {
         BusinessLogicLogin bllogin = new BusinessLogicLogin();
         if (!bllogin.usernameValid1(name)){
             //username input incorrect
-            response.sendRedirect("login");
+            response.sendRedirect("index.html");
         }
 
         User user = dao.getUser(name);
@@ -48,7 +48,7 @@ public class LoginServlet extends HttpServlet {
                 response.sendRedirect("mgrHome.html");
             }
             else {
-                response.sendRedirect("empHome.html");
+                response.sendRedirect("viewMyExpenses");
             }
 
         }

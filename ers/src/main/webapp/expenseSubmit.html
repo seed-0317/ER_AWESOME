@@ -39,37 +39,37 @@
     </ul>
     <hr />
 </div>
-
+<div class="container">
  <div class="lower">
      <h2><u>Previous Expense Submissions</u></h2>
-    <table class="table table-striped">
-        <thead class="table-bordered">
-            <tr>
-            <th class="col-md-1">Request ID</th>
-            <th class="col-md-1">Amount</th>
-            <th class="col-md-3">Expense Description</th>
-            <th class="col-md-1">Date Submitted</th>
-            <th class="col-md-1">Date Resolved</th>
-            <th class="col-md-1">Type</th>
-            <th class="col-md-1">Expense Status</th>
-            <th class="col-md-1">Expense Submitter</th>
-            <th class="col-md-1">Expense Resolver</th>
-            </tr>
-        </thead>
-        <tbody>
-        <div class = "row">
+     <hr />
+     <div class="col-md-1"><strong>Request ID</strong></div>
+     <div class="col-md-1"><strong>Amount</strong></div>
+     <div class="col-md-3"><strong>Expense Description</strong></div>
+     <div class="col-md-2"><strong>Date Submitted</strong></div>
+     <div class="col-md-1"><strong>Date Resolved</strong></div>
+     <div class="col-md-1"><strong>Type</strong></div>
+     <div class="col-md-1"><strong>Expense Status</strong></div>
+     <div class="col-md-1"><strong>Expense Submitter</strong></div>
+     <div class="col-md-1"><strong>Expense Resolver</strong></div>
+    <hr />
+    <div color="black">
         <#list expenses as expense>
-            <td class="col-md-1">${expense.rid}</td>
-            <td class="col-md-1">${expense.amount}</td>
-            <td class="col-md-3">${expense.description}</td>
-            <td class="col-md-1">${expense.submitted}</td>
-            <td class="col-md-1">${expense.resolved}</td>
-            <td class="col-md-1">${expense.type}</td>
-            <td class="col-md-1">${expense.status}</td>
-            <td class="col-md-1">${expense.submitter}</td>
-            <td class="col-md-1">${expense.resolver}</td>
+            <#if expense.uAuthor.uFirstName == user.uFirstName>
+                <div class="row">
+            <div class="col-md-1">${(expense.rId) !"N/A"}</div>
+            <div class="col-md-1">${(expense.rAmount) !"N/A"}</div>
+            <div class="col-md-3">${(expense.rDescription) !"N/A"}</div>
+            <div class="col-md-2">${(expense.rSubmitted) !"N/A"}</div>
+            <div class="col-md-1">${(expense.rResolved)  !"N/A"}</div>
+            <div class="col-md-1">${(expense.rType.rtType)  !"N/A"}</div>
+            <div class="col-md-1">${(expense.rStatus.rsStatus) !"N/A"}</div>
+            <div class="col-md-1">${(expense.uAuthor.uLastName)  !"N/A"}</div>
+            <div class="col-md-1">${(expense.uResolver.uLastName) !"N/A"}</div>
+                </div>
+            </#if>
         </#list>
-        </div>
+    </div>
 <!--This is just dummy data for now-->
         <!--<tbody>-->
             <!--<tr>-->
@@ -84,8 +84,7 @@
                 <!--<td>Mr.Big</td>-->
             <!--</tr>-->
             <!---->
-        </tbody>
-    </table>
+ </div>
  </div>
 
     <div class = "upper">
