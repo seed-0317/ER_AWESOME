@@ -19,7 +19,7 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("index.html").forward(request,response);
+        request.getRequestDispatcher("index.html").forward(request, response);
     }
 
     @Override
@@ -30,28 +30,28 @@ public class LoginServlet extends HttpServlet {
         String name = request.getParameter("username");
 
         BusinessLogicLogin bllogin = new BusinessLogicLogin();
-        if (!bllogin.usernameValid1(name)){
+        if (!bllogin.usernameValid1(name)) {
             //username input incorrect
-            response.sendRedirect("index.html");
-        }
 
-        User user = dao.getUser(name);
-        if(user.getuUserName() == null) {
-            // user does not exist in database
             response.sendRedirect("login");
-
         } else {
-            HttpSession session = request.getSession();
-            session.setAttribute("user", user);
+            User user = dao.getUser(name);
+            if (user.getuUserName() == null) {
+                // user does not exist in database
+                response.sendRedirect("login");
 
-            if (user.getuRole().getUrRole().equals("MANAGER")) {
-                response.sendRedirect("mgrHome.html");
+            } else {
+                HttpSession session = request.getSession();
+                session.setAttribute("user", user);
+
+                if (user.getuRole().getUrRole().equals("MANAGER")) {
+                    response.sendRedirect("mgrHome.html");
+                } else {
+                    response.sendRedirect("viewMyExpenses");
+                }
+
             }
-            else {
-                response.sendRedirect("viewMyExpenses");
-            }
+
 
         }
-
     }
-}
