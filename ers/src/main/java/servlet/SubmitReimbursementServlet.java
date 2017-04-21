@@ -40,36 +40,35 @@ public class SubmitReimbursementServlet extends HttpServlet {
 
         //Amanda code to catch submission errors pre dao call
         BusinessLogicReimbursement blreimbursement = new BusinessLogicReimbursement();
-        if (!blreimbursement.amountValid(amount)){
+        if (!blreimbursement.amountValid(amount)) {
             //amount input incorrect
             resp.sendRedirect("SubmitReimbursementServlet");
         }
 
-        BusinessLogicReimbursement blreimbursement1 = new BusinessLogicReimbursement();
-        if (!blreimbursement1.descriptionValid(description)){
+        else if (!blreimbursement.descriptionValid(description)) {
             //description input incorrect
             resp.sendRedirect("SubmitReimbursementServlet");
         }
 
-        BusinessLogicReimbursement blreimbursement2 = new BusinessLogicReimbursement();
-        if (!blreimbursement2.authorValid(uauthor)){
+        else if (!blreimbursement.authorValid(uauthor)) {
             //author input incorrect
             resp.sendRedirect("SubmitReimbursementServlet");
         }
         //
         //ask team about author (auto-populated or open text field?)
-        User currUser = new User();
-        currUser.setuUserName(uauthor);
+        else {
+            User currUser = new User();
+            currUser.setuUserName(uauthor);
 
-        ExpenseType currExpense = new ExpenseType();
-        currExpense.setRtType(utype);
+            ExpenseType currExpense = new ExpenseType();
+            currExpense.setRtType(utype);
 
-        ExpenseStatus currStatus = new ExpenseStatus();
-        currStatus.setRsStatus("Submitted");
+            ExpenseStatus currStatus = new ExpenseStatus();
+            currStatus.setRsStatus("Submitted");
 
-        Timestamp datesubmitted = new Timestamp(System.currentTimeMillis());
+            Timestamp datesubmitted = new Timestamp(System.currentTimeMillis());
 
-        Expense newExpense = new Expense(amount,description,datesubmitted,currExpense,currUser,currStatus);
+            Expense newExpense = new Expense(amount, description, datesubmitted, currExpense, currUser, currStatus);
 
 
 //        public User(int uID, String uUserName, String uFirstName, String uLastName, String uEmail, UserRoles uRole) {
@@ -81,15 +80,13 @@ public class SubmitReimbursementServlet extends HttpServlet {
 //            this.uRole = uRole;
 //        }
 
-        ExpenseDao dao = DaoUtilities.getExpenseDao();
-        try {
-            dao.AddReimbursement(newExpense);
-            req.getSession().setAttribute("message", "Reimbursement Added");
-            req.getSession().setAttribute("messageClass", "alert-success");
-            resp.sendRedirect("expenseSubmit.html");
-        }
-
-            catch (Exception e){
+            ExpenseDao dao = DaoUtilities.getExpenseDao();
+            try {
+                dao.AddReimbursement(newExpense);
+                req.getSession().setAttribute("message", "Reimbursement Added");
+                req.getSession().setAttribute("messageClass", "alert-success");
+                resp.sendRedirect("expenseSubmit.html");
+            } catch (Exception e) {
                 e.printStackTrace();
 
                 //change the message
@@ -100,6 +97,7 @@ public class SubmitReimbursementServlet extends HttpServlet {
 
             }
         }
+    }
 
     }
 
