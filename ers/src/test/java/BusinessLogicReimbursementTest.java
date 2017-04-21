@@ -50,24 +50,24 @@ public class BusinessLogicReimbursementTest {
 
     }
 
-    @Test
-    public void testReimbursementAuthorValid() {
-        BusinessLogicReimbursement bltest = new BusinessLogicReimbursement();
-
-        String str1 = null;
-        String str3 = "Sara ";
-        String str4 = "";
-        String str5 = "a";
-        String str6 = "ab";
-        String str7 = "!!!";
-
-        Assert.assertFalse("Username is null", bltest.authorValid(str1));
-        Assert.assertTrue("Username is >0 characters", bltest.authorValid(str3));
-        Assert.assertFalse("Username is >0 characters", bltest.authorValid(str4));
-        Assert.assertTrue("Username is >0 characters", bltest.authorValid(str5));
-        Assert.assertTrue("Username is >0 characters", bltest.authorValid(str6));
-        Assert.assertTrue("Username is >0 characters", bltest.authorValid(str7));
-
-    }
+//    @Test
+//    public void testReimbursementAuthorValid() {
+//        BusinessLogicReimbursement bltest = new BusinessLogicReimbursement();
+//
+//        String str1 = null;
+//        String str3 = "Sara ";
+//        String str4 = "";
+//        String str5 = "a";
+//        String str6 = "ab";
+//        String str7 = "!!!";
+//
+//        Assert.assertFalse("Username is null", bltest.authorValid(str1));
+//        Assert.assertTrue("Username is >0 characters", bltest.authorValid(str3));
+//        Assert.assertFalse("Username is >0 characters", bltest.authorValid(str4));
+//        Assert.assertTrue("Username is >0 characters", bltest.authorValid(str5));
+//        Assert.assertTrue("Username is >0 characters", bltest.authorValid(str6));
+//        Assert.assertTrue("Username is >0 characters", bltest.authorValid(str7));
+//
+//    }
 
 }

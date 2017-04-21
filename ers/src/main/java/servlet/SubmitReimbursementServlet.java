@@ -20,10 +20,14 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Timestamp;
+import org.apache.log4j.Logger;
 
 
 @WebServlet (value = "/SubmitReimbursementServlet")
 public class SubmitReimbursementServlet extends HttpServlet {
+
+    private static final Logger LOGGER = Logger.getLogger(SubmitReimbursementServlet.class);
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getRequestDispatcher("expenseSubmit.html").forward(req,resp);
@@ -31,31 +35,33 @@ public class SubmitReimbursementServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //super.doPost(req, resp);
 
         Double amount = Double.parseDouble(req.getParameter("amount"));
         String description = req.getParameter("description");
         String utype = req.getParameter("type");
         String uauthor = req.getParameter("author");
+        LOGGER.info(uauthor + " is trying to submit a reimbursement");
 
         //Amanda code to catch submission errors pre dao call
         BusinessLogicReimbursement blreimbursement = new BusinessLogicReimbursement();
         if (!blreimbursement.amountValid(amount)) {
             //amount input incorrect
+            LOGGER.info(amount + " amount not valid in reimbursement submission");
             resp.sendRedirect("SubmitReimbursementServlet");
         }
 
         else if (!blreimbursement.descriptionValid(description)) {
             //description input incorrect
+            LOGGER.info(description + " description not valid in reimbursement submission");
             resp.sendRedirect("SubmitReimbursementServlet");
         }
 
-        else if (!blreimbursement.authorValid(uauthor)) {
-            //author input incorrect
-            resp.sendRedirect("SubmitReimbursementServlet");
-        }
-        //
-        //ask team about author (auto-populated or open text field?)
+//        else if (!blreimbursement.authorValid(uauthor)) {
+//            //author input incorrect
+//            resp.sendRedirect("SubmitReimbursementServlet");
+//            LOGGER.info(uauthor + " author not valid");
+//        }
+
         else {
             User currUser = new User();
             currUser.setuUserName(uauthor);
@@ -65,6 +71,7 @@ public class SubmitReimbursementServlet extends HttpServlet {
 
             ExpenseStatus currStatus = new ExpenseStatus();
             currStatus.setRsStatus("Submitted");
+            //LOGGER.info(parameter + " is submitted");
 
             Timestamp datesubmitted = new Timestamp(System.currentTimeMillis());
 
@@ -83,11 +90,15 @@ public class SubmitReimbursementServlet extends HttpServlet {
             ExpenseDao dao = DaoUtilities.getExpenseDao();
             try {
                 dao.AddReimbursement(newExpense);
+                LOGGER.info("Submit reimbursement request success.");
+
                 req.getSession().setAttribute("message", "Reimbursement Added");
                 req.getSession().setAttribute("messageClass", "alert-success");
                 resp.sendRedirect("expenseSubmit.html");
+
             } catch (Exception e) {
                 e.printStackTrace();
+                LOGGER.error("Submit Reimbursement request failed. " + e.getClass() + ": " + e.getMessage());
 
                 //change the message
                 req.getSession().setAttribute("message", "There was a problem creating the submission");
