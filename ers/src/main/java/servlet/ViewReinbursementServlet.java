@@ -20,17 +20,17 @@ import java.util.List;
 /**
  * Created by vso513 on 4/20/17.
  */
-@WebServlet (value = "/SubmitReimbursementServlet")
+@WebServlet (value = "/viewMyExpenses")
 public class ViewReinbursementServlet extends HttpServlet {
 
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ExpenseDao dao = DaoUtilities.getExpenseDao();
-        List<Expense> expense = dao.getAllExpenses();
+        List<Expense> expenses = dao.getAllExpenses();
 
-        req.getSession().setAttribute("expenses", expense);
-
+        req.getSession().setAttribute("expenses", expenses);
+//      
         req.getRequestDispatcher("expenseSubmit.html").forward(req, resp);
     }
 

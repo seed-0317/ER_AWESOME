@@ -58,16 +58,16 @@
         </thead>
         <tbody>
         <tr>
-        <#list expenses as expenses>
-            <td class="col-md-1">${rid}</td>
-            <td class="col-md-1">${amount}</td>
-            <td class="col-md-3">${description}</td>
-            <td class="col-md-1">${submitted}</td>
-            <td class="col-md-1">${resolved}</td>
-            <td class="col-md-1">${type}</td>
-            <td class="col-md-1">${status}</td>
-            <td class="col-md-1">${submitter}</td>
-            <td class="col-md-1">${resolver}</td>
+        <#list expenses as expense>
+            <td class="col-md-1">${expense.rid}</td>
+            <td class="col-md-1">${expense.amount}</td>
+            <td class="col-md-3">${expense.description}</td>
+            <td class="col-md-1">${expense.submitted}</td>
+            <td class="col-md-1">${expense.resolved}</td>
+            <td class="col-md-1">${expense.type}</td>
+            <td class="col-md-1">${expense.status}</td>
+            <td class="col-md-1">${expense.submitter}</td>
+            <td class="col-md-1">${expense.resolver}</td>
         </#list>
         </tr>
 <!--This is just dummy data for now-->
@@ -106,7 +106,13 @@
         </div>
         <div class="col-md-2"> <!--this needs to be dropdown>-->
             <label for="type">Expense Type</label>
-            <input class="form-control" id="type" type="text" placeholder="Meals">
+            <select name = "types" class="form-control" id="type" type="text" placeholder="Meals">
+                <option value="meals">Meals</option>
+                <option value="travel">Travel</option>
+                <option value="mileage">Mileage</option>
+                <option value="supplies">Supplies</option>
+                <option value="other">Other</option>
+            </select>
         </div>
             <div class="col-md-2">
                 <label for="author">Submitted by</label>
