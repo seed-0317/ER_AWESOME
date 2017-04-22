@@ -24,7 +24,7 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("index.html").forward(request,response);
+        request.getRequestDispatcher("index.html").forward(request, response);
     }
 
     @Override
@@ -36,13 +36,14 @@ public class LoginServlet extends HttpServlet {
         LOGGER.info(name + " is trying to login");
 
         BusinessLogicLogin bllogin = new BusinessLogicLogin();
-        if (!bllogin.usernameValid1(name)){
+        if (!bllogin.usernameValid1(name)) {
             //username input incorrect
             LOGGER.info(name + " not valid at login");
             response.sendRedirect("login");
 
         }
         else {
+
             User user = dao.getUser(name);
             if (user.getuUserName() == null) {
                 // user does not exist in database
@@ -52,8 +53,18 @@ public class LoginServlet extends HttpServlet {
             } else {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", user);
+
                 LOGGER.info(name + " successfully logged in!");
                 response.sendRedirect("UpdatePersonalData");
+
+
+                if (user.getuRole().getUrRole().equals("MANAGER")) {
+                    response.sendRedirect("mgrHome.html");
+                } else {
+                    response.sendRedirect("expenseSubmit.html");
+                }
+
+
             }
         }
     }

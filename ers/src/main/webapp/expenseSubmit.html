@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="shortcut icon" href="faviconmoney.ico"/>
     <meta charset="utf-8">
     <title>Submit Expenses</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,15 +16,16 @@
 
     .upper {
     top: 5%;
-    height: 65%;
-    background-color: white;
+    height: 20%;
+    background-color: lavender;
     overflow:scroll;
     }
 
     .lower {
+    top: 25%;
     bottom: 0;
-    height: 25%;
-    background-color: antiquewhite;
+    height: 75%;
+    background-color: white;
     }
     </style>
 </head>
@@ -34,51 +36,64 @@
     <ul class="nav nav-pills">
     <li role="presentation" class="active"><a href="#">Expenses</a></li>
     <li role="presentation"><a href="#">Employee Data</a></li>
-    <li role="presentation" action = "logout" method ="post"><a href="#">Logout</a></li>
+
+    <li role="presentation"><a href="/logout">Logout</a></li>
+      
     </ul>
     <hr />
 </div>
 
- <div class="upper">
+ <div class="lower">
      <h2><u>Previous Expense Submissions</u></h2>
     <table class="table table-striped">
         <thead class="table-bordered">
             <tr>
             <th class="col-md-1">Request ID</th>
             <th class="col-md-1">Amount</th>
-            <th class="col-md-2">Expense Description</th>
+            <th class="col-md-3">Expense Description</th>
             <th class="col-md-1">Date Submitted</th>
             <th class="col-md-1">Date Resolved</th>
-            <th class="col-md-2">Type</th>
-            <th class="col-md-1">Status</th>
+            <th class="col-md-1">Type</th>
+            <th class="col-md-1">Expense Status</th>
             <th class="col-md-1">Expense Submitter</th>
-            <th class="col-md-1">Resolver</th>
+            <th class="col-md-1">Expense Resolver</th>
             </tr>
-                </thead>
-<!--This is just dummy data for now-->
+        </thead>
         <tbody>
-            <tr>
-                <td>1</td>
-                <td>27.99</td>
-                <td>Meal for Client</td>
-                <td>3/31/17 10:00:00</td>
-                <td>4/17/17 10:00:00</td>
-                <td>Meals</td>
-                <td>Resolved</td>
-                <td>Mr.Employee</td>
-                <td>Mr.Big</td>
-            </tr>
+        <tr>
+        <#list expenses as expense>
+            <td class="col-md-1">${expense.rid}</td>
+            <td class="col-md-1">${expense.amount}</td>
+            <td class="col-md-3">${expense.description}</td>
+            <td class="col-md-1">${expense.submitted}</td>
+            <td class="col-md-1">${expense.resolved}</td>
+            <td class="col-md-1">${expense.type}</td>
+            <td class="col-md-1">${expense.status}</td>
+            <td class="col-md-1">${expense.submitter}</td>
+            <td class="col-md-1">${expense.resolver}</td>
+        </#list>
+        </tr>
+<!--This is just dummy data for now-->
+        <!--<tbody>-->
+            <!--<tr>-->
+                <!--<td>1</td>-->
+                <!--<td>27.99</td>-->
+                <!--<td>Meal for Client</td>-->
+                <!--<td>3/31/17 10:00:00</td>-->
+                <!--<td>4/17/17 10:00:00</td>-->
+                <!--<td>Meals</td>-->
+                <!--<td>Resolved</td>-->
+                <!--<td>Mr.Employee</td>-->
+                <!--<td>Mr.Big</td>-->
+            <!--</tr>-->
+            <!---->
         </tbody>
     </table>
  </div>
 
-    <div class = "lower">
+    <div class = "upper">
     <form class ="form inline" action="SubmitReimbursementServlet" method = "post">
         <h2><u>New Expense Submission</u></h2>
-        <!--<div class="col-md-1">-->
-          <!--<label for="rid">Request ID</label>-->
-            <!--<input class="form-control" id="rid" type="text" placeholder="100">-->
-        <!--</div>-->
         <div class = "row">
         <div class="col-md-1">
             <label for="amount">Amount</label>
@@ -94,7 +109,13 @@
         </div>
         <div class="col-md-2"> <!--this needs to be dropdown>-->
             <label for="type">Expense Type</label>
-            <input class="form-control" id="type" type="text" placeholder="Meals">
+            <select name = "types" class="form-control" id="type" type="text" placeholder="Meals">
+                <option value="meals">Meals</option>
+                <option value="travel">Travel</option>
+                <option value="mileage">Mileage</option>
+                <option value="supplies">Supplies</option>
+                <option value="other">Other</option>
+            </select>
         </div>
             <div class="col-md-2">
                 <label for="author">Submitted by</label>
@@ -102,9 +123,9 @@
             </div>
         <br />
             <div class="col-md-2">
-            <!--<div class ="form-group">
+            <div class ="form-group">
             <button type="submit" class="btn" value="Login">Submit</button>
-            </div> !-->
+            </div>
         </div>
         </div>
     </form>
