@@ -32,7 +32,6 @@ public class UpdatePersonalDataServlet extends HttpServlet{
 
         req.getRequestDispatcher("empInfo.html").forward(req,resp);
 
-
     }
 
     @Override
@@ -48,32 +47,52 @@ public class UpdatePersonalDataServlet extends HttpServlet{
         //Amanda code to catch submission errors pre dao call
         BusinessLogicUserInfo bluserinfo = new BusinessLogicUserInfo();
         if (!bluserinfo.usernameValid(username)){
-            //amount input incorrect
+            //username input incorrect
+            LOGGER.info(username+ " username entry not valid in an update personal data submission");
             resp.sendRedirect("UpdatePersonalData");
         }
 
         else if (!bluserinfo.firstNameValid(firstname)){
-            //description input incorrect
+            //firstname input incorrect
+            LOGGER.info(firstname + " first name entry not valid in an update personal data submission");
             resp.sendRedirect("UpdatePersonalData");
         }
 
         else if (!bluserinfo.lastNameValid(lastname)){
-            //author input incorrect
+            //lastname input incorrect
+            LOGGER.info(lastname + " last name entry not valid in an update personal data submission");
             resp.sendRedirect("UpdatePersonalData");
         }
 
         else if
             (!bluserinfo.emailValid(email)) {
-                //author input incorrect
-                resp.sendRedirect("UpdatePersonalData");
+            //email input incorrect
+            LOGGER.info(email + " email entry not valid in an update personal data submission");
+            resp.sendRedirect("UpdatePersonalData");
             }
         //
         else {
             User user = (User) session.getAttribute("user");
-            user.setuEmail(email);
-            user.setuFirstName(firstname);
-            user.setuLastName(lastname);
-            user.setuUserName(username);
+
+            if(!email.equals(user.getuEmail())){
+                LOGGER.info("The email for: "+user.getuID() +" has been updated from: "+user.getuEmail()+" to: "+ email +".");
+                user.setuEmail(email);
+            }
+
+            if(!firstname.equals(user.getuFirstName())){
+                LOGGER.info("The first name for: "+user.getuID() +" has been updated from: "+user.getuFirstName()+" to: "+ firstname +".");
+                user.setuFirstName(firstname);
+            }
+
+            if(!lastname.equals(user.getuLastName())){
+                LOGGER.info("The last name for: "+user.getuID() +" has been updated from: "+user.getuLastName()+" to: "+ lastname +".");
+                user.setuLastName(lastname);
+            }
+
+            if(!username.equals(user.getuUserName())){
+                LOGGER.info("The user name for: "+user.getuID() +" has been updated from: "+user.getuUserName()+" to: "+ username +".");
+                user.setuUserName(username);
+            }
 
             UserDaoImpl dao = new UserDaoImpl();
             dao.updateEmployee(user);
