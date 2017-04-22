@@ -43,7 +43,10 @@ public class LoginServlet extends HttpServlet {
 
             response.sendRedirect("login");
 
-        } else {
+        }
+        else {
+
+
 
             User user = dao.getUser(name);
             if (user.getuUserName() == null) {
@@ -62,7 +65,9 @@ public class LoginServlet extends HttpServlet {
                 if (user.getuRole().getUrRole().equals("MANAGER")) {
                     response.sendRedirect("mgrHome.html");
                 } else {
-                    response.sendRedirect("viewMyExpenses");
+                  
+                    response.sendRedirect("expenseSubmit.html");
+
                 }
 
 
@@ -70,4 +75,7 @@ public class LoginServlet extends HttpServlet {
 
 
         }
+
     }
+}
+

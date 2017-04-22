@@ -2,6 +2,7 @@ package servlet;
 
 import dao.DaoUtilities;
 import dao.ExpenseDao;
+import dao.ExpenseDaoImpl;
 import dao.UserDao;
 import model.Expense;
 import model.ExpenseStatus;
@@ -58,7 +59,8 @@ public class SubmitReimbursementServlet extends HttpServlet {
             resp.sendRedirect("SubmitReimbursementServlet");
         }
 
-//        else if (!blreimbursement.authorValid(uauthor)) {
+// don't need this as uauthor is autopopulated
+// else if (!blreimbursement.authorValid(uauthor)) {
 //            //author input incorrect
 //            resp.sendRedirect("SubmitReimbursementServlet");
 //            LOGGER.info(uauthor + " author not valid");
@@ -73,7 +75,7 @@ public class SubmitReimbursementServlet extends HttpServlet {
 
             ExpenseStatus currStatus = new ExpenseStatus();
             currStatus.setRsStatus("Submitted");
-            //LOGGER.info(parameter + " is submitted");
+            //LOGGER.info("Object is changing to submitted");
 
             Timestamp datesubmitted = new Timestamp(System.currentTimeMillis());
 
@@ -102,7 +104,6 @@ public class SubmitReimbursementServlet extends HttpServlet {
                 e.printStackTrace();
                 LOGGER.error("Submit Reimbursement request failed. " + e.getClass() + ": " + e.getMessage());
 
-                //change the message
                 req.getSession().setAttribute("message", "There was a problem creating the submission");
                 req.getSession().setAttribute("messageClass", "alert-danger");
 
