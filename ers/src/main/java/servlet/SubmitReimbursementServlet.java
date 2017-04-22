@@ -30,7 +30,7 @@ import static java.lang.Double.parseDouble;
 public class SubmitReimbursementServlet extends HttpServlet {
 
     private static final Logger LOGGER = Logger.getLogger(SubmitReimbursementServlet.class);
-
+    User currUser = new User();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getRequestDispatcher("expenseSubmit.html").forward(req,resp);
@@ -43,19 +43,19 @@ public class SubmitReimbursementServlet extends HttpServlet {
         String description = req.getParameter("description");
         String utype = req.getParameter("type");
         String uauthor = req.getParameter("author");
-        LOGGER.info(uauthor + " is trying to submit a reimbursement");
+        LOGGER.info(currUser.getuID() + " is trying to submit a reimbursement");
 
         //Amanda code to catch submission errors pre dao call
         BusinessLogicReimbursement blreimbursement = new BusinessLogicReimbursement();
         if (!blreimbursement.amountValid(amount)) {
             //amount input incorrect
-            LOGGER.info(amount + " amount not valid in reimbursement submission");
+            LOGGER.info(currUser.getuID() + " amount entry: " + amount +" not valid in reimbursement submission");
             resp.sendRedirect("SubmitReimbursementServlet");
         }
 
         else if (!blreimbursement.descriptionValid(description)) {
             //description input incorrect
-            LOGGER.info(description + " description not valid in reimbursement submission");
+            LOGGER.info(currUser.getuID() + " description entry: "+ description +" not valid in reimbursement submission");
             resp.sendRedirect("SubmitReimbursementServlet");
         }
 
@@ -67,7 +67,7 @@ public class SubmitReimbursementServlet extends HttpServlet {
 //        }
 
         else {
-            User currUser = new User();
+
             currUser.setuUserName(uauthor);
 
             ExpenseType currExpense = new ExpenseType();
@@ -94,7 +94,7 @@ public class SubmitReimbursementServlet extends HttpServlet {
             ExpenseDao dao = DaoUtilities.getExpenseDao();
             try {
                 dao.AddReimbursement(newExpense);
-                LOGGER.info("Submit reimbursement request success.");
+                LOGGER.info("Submit reimbursement request success. Submitted by:" + currUser.getuID());
 
                 req.getSession().setAttribute("message", "Reimbursement Added");
                 req.getSession().setAttribute("messageClass", "alert-success");
@@ -102,7 +102,7 @@ public class SubmitReimbursementServlet extends HttpServlet {
 
             } catch (Exception e) {
                 e.printStackTrace();
-                LOGGER.error("Submit Reimbursement request failed. " + e.getClass() + ": " + e.getMessage());
+                LOGGER.error("Submit reimbursement request failed. Request from: " + currUser.getuID() + e.getClass() + ": " + e.getMessage());
 
                 req.getSession().setAttribute("message", "There was a problem creating the submission");
                 req.getSession().setAttribute("messageClass", "alert-danger");

@@ -32,33 +32,34 @@ public class LoginServlet extends HttpServlet {
 
         UserDao dao = DaoUtilities.getUserDao();
 
+
+        //User user = (User) session.getAttribute("user");
         String name = request.getParameter("username");
-        LOGGER.info(name + " is trying to login");
+        User user = dao.getUser(name);
+        HttpSession session = request.getSession();
+        session.setAttribute("user", user);
+        LOGGER.info(user.getuID() + " is trying to login");
 
         BusinessLogicLogin bllogin = new BusinessLogicLogin();
         if (!bllogin.usernameValid1(name)) {
             //username input incorrect
 
-            LOGGER.info(name + " not valid at login");
+            LOGGER.info(user.getuID() + " not valid at login");
 
             response.sendRedirect("login");
 
         }
         else {
 
-
-
-            User user = dao.getUser(name);
             if (user.getuUserName() == null) {
                 // user does not exist in database
-                LOGGER.info(name + " doesn't exist in the database");
+                LOGGER.info(user.getuID() + " doesn't exist in the database");
                 response.sendRedirect("login");
 
             } else {
-                HttpSession session = request.getSession();
-                session.setAttribute("user", user);
 
-                LOGGER.info(name + " successfully logged in!");
+                LOGGER.info(user.getuID() + " successfully logged in!");
+
                 response.sendRedirect("UpdatePersonalData");
 
 
