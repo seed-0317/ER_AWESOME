@@ -38,7 +38,9 @@ public class LoginServlet extends HttpServlet {
         BusinessLogicLogin bllogin = new BusinessLogicLogin();
         if (!bllogin.usernameValid1(name)) {
             //username input incorrect
+
             LOGGER.info(name + " not valid at login");
+
             response.sendRedirect("login");
 
         } else {
@@ -60,11 +62,12 @@ public class LoginServlet extends HttpServlet {
                 if (user.getuRole().getUrRole().equals("MANAGER")) {
                     response.sendRedirect("mgrHome.html");
                 } else {
-                    response.sendRedirect("expenseSubmit.html");
+                    response.sendRedirect("viewMyExpenses");
                 }
 
 
             }
+
+
         }
     }
-}
