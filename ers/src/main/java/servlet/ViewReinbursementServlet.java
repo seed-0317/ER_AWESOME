@@ -29,8 +29,9 @@ public class ViewReinbursementServlet extends HttpServlet {
         ExpenseDao dao = DaoUtilities.getExpenseDao();
         List<Expense> expenses = dao.getAllExpenses();
 
+        
         req.getSession().setAttribute("expenses", expenses);
-//      
+//
         req.getRequestDispatcher("expenseSubmit.html").forward(req, resp);
     }
 
