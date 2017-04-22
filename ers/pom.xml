@@ -6,6 +6,9 @@
     <groupId>com.ers</groupId>
     <artifactId>ers</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <!--do we need in pom-->
+    <packaging>war</packaging>
+
 
     <dependencies>
         <dependency>
