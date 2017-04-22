@@ -43,36 +43,37 @@ public class UpdatePersonalDataServlet extends HttpServlet{
         String firstname = req.getParameter("firstname");
         String lastname = req.getParameter("lastname");
         String email = req.getParameter("email");
+        User user = (User) session.getAttribute("user");
+
 
         //Amanda code to catch submission errors pre dao call
         BusinessLogicUserInfo bluserinfo = new BusinessLogicUserInfo();
         if (!bluserinfo.usernameValid(username)){
             //username input incorrect
-            LOGGER.info(username+ " username entry not valid in an update personal data submission");
+            LOGGER.info("Username entry:" + username +" by " + user.getuID() +" not valid in an update personal data submission");
             resp.sendRedirect("UpdatePersonalData");
         }
 
         else if (!bluserinfo.firstNameValid(firstname)){
             //firstname input incorrect
-            LOGGER.info(firstname + " first name entry not valid in an update personal data submission");
+            LOGGER.info("First name entry:" + firstname +" by " + user.getuID() +" not valid in an update personal data submission");
             resp.sendRedirect("UpdatePersonalData");
         }
 
         else if (!bluserinfo.lastNameValid(lastname)){
             //lastname input incorrect
-            LOGGER.info(lastname + " last name entry not valid in an update personal data submission");
+            LOGGER.info("Last name entry:" + lastname + " by " + user.getuID() +" not valid in an update personal data submission");
             resp.sendRedirect("UpdatePersonalData");
         }
 
         else if
             (!bluserinfo.emailValid(email)) {
             //email input incorrect
-            LOGGER.info(email + " email entry not valid in an update personal data submission");
+            LOGGER.info("email entry:" + email + " by " + user.getuID() + " not valid in an update personal data submission");
             resp.sendRedirect("UpdatePersonalData");
             }
         //
         else {
-            User user = (User) session.getAttribute("user");
 
             if(!email.equals(user.getuEmail())){
                 LOGGER.info("The email for: "+user.getuID() +" has been updated from: "+user.getuEmail()+" to: "+ email +".");
