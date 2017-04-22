@@ -23,6 +23,8 @@ import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Timestamp;
 import org.apache.log4j.Logger;
 
+import static java.lang.Double.parseDouble;
+
 
 @WebServlet (value = "/SubmitReimbursementServlet")
 public class SubmitReimbursementServlet extends HttpServlet {
@@ -37,7 +39,7 @@ public class SubmitReimbursementServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        Double amount = Double.parseDouble(req.getParameter("amount"));
+        Double amount = parseDouble(req.getParameter("amount"));
         String description = req.getParameter("description");
         String utype = req.getParameter("type");
         String uauthor = req.getParameter("author");
@@ -105,7 +107,7 @@ public class SubmitReimbursementServlet extends HttpServlet {
                 req.getSession().setAttribute("message", "There was a problem creating the submission");
                 req.getSession().setAttribute("messageClass", "alert-danger");
 
-                req.getRequestDispatcher("expenseSubmit.html").forward(req, resp);
+                req.getRequestDispatcher("SubmitReimbursementServlet").forward(req, resp);
 
             }
         }

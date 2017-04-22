@@ -30,7 +30,7 @@ public class ViewReinbursementServlet extends HttpServlet {
         List<Expense> expenses = dao.getAllExpenses();
 
         req.getSession().setAttribute("expenses", expenses);
-//      
+
         req.getRequestDispatcher("expenseSubmit.html").forward(req, resp);
     }
 

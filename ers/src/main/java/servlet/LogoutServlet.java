@@ -22,11 +22,12 @@ import org.apache.log4j.Logger;
 
     @Override
 
+
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("user");
         LOGGER.info(user.getuID() + " successfully logged out!");
-
+  
         req.getSession().invalidate();
         resp.sendRedirect("login");
     }
