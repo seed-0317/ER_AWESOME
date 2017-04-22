@@ -15,9 +15,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import org.apache.log4j.Logger;
 
 @WebServlet (value = "/UpdatePersonalData")
 public class UpdatePersonalDataServlet extends HttpServlet{
+
+    private static final Logger LOGGER = Logger.getLogger(UpdatePersonalDataServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
