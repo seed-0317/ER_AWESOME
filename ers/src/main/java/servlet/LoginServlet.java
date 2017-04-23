@@ -60,7 +60,8 @@ public class LoginServlet extends HttpServlet {
 
                 LOGGER.info(user.getuID() + " successfully logged in!");
 
-                response.sendRedirect("UpdatePersonalData");
+//                why is this here?  Think it's causing redirect issue ???????
+//                response.sendRedirect("UpdatePersonalData");
 
 
                 if (user.getuRole().getUrRole().equals("MANAGER")) {
