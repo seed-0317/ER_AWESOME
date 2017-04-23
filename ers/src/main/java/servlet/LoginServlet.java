@@ -46,7 +46,7 @@ public class LoginServlet extends HttpServlet {
 
             LOGGER.info(user.getuID() + " not valid at login");
 
-            response.sendRedirect("login");
+            response.sendRedirect("index.html);
 
         }
         else {
@@ -60,18 +60,17 @@ public class LoginServlet extends HttpServlet {
 
                 LOGGER.info(user.getuID() + " successfully logged in!");
 
+
 //                why is this here?  Think it's causing redirect issue ???????
 //                response.sendRedirect("UpdatePersonalData");
 
 
-                if (user.getuRole().getUrRole().equals("MANAGER")) {
-                    response.sendRedirect("mgrHome.html");
-                } else {
-                  
-                    response.sendRedirect("expenseSubmit.html");
 
-                }
-
+            if (user.getuRole().getUrRole().equals("MANAGER")) {
+                response.sendRedirect("ManagerView");
+            }
+            else {
+                response.sendRedirect("expenseSubmit.html");
 
             }
 

@@ -5,16 +5,16 @@ import model.ExpenseStatus;
 import model.ExpenseType;
 import model.User;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
+import org.apache.log4j.Logger;
 
 /**
  * Created by qzh225 on 4/17/17.
  */
 public class ExpenseDaoImpl implements ExpenseDao{
+
+    private static final Logger LOGGER = Logger.getLogger(ExpenseDaoImpl.class);
 
     @Override
     public ArrayList<Expense> getAllExpenses(){
@@ -38,8 +38,8 @@ public class ExpenseDaoImpl implements ExpenseDao{
             sql = sql + "  join erawesome.ers_reimbursement_type e on e.rt_id = a.rt_type";
 
             stmt = connection.prepareStatement(sql);
-
             ResultSet rs = stmt.executeQuery();
+            LOGGER.info("Connected to database and all expenses called successfully");
 
             while (rs.next()) {
 
@@ -77,6 +77,8 @@ public class ExpenseDaoImpl implements ExpenseDao{
         }
         catch (SQLException e) {
             e.printStackTrace();
+            LOGGER.error("There is a problem retrieving all expenses data from the database. Check database connection." + e.getClass() + ": " + e.getMessage());
+
         }
         finally {
             try {
@@ -85,6 +87,7 @@ public class ExpenseDaoImpl implements ExpenseDao{
                 }
                 if (connection != null) {
                     connection.close();
+                    LOGGER.info("Connection closed on getAllExpenses");
                 }
             }
             catch (SQLException e) {
@@ -131,7 +134,7 @@ public class ExpenseDaoImpl implements ExpenseDao{
         }
         catch (SQLException e) {
             e.printStackTrace();
-            //todo log insert failure
+            LOGGER.error("There is a problem preventing user from submitting a new reimbursement request to the database from user: " +reimb.getuAuthor().getuID()  + e.getClass() + ": " + e.getMessage());
         }
         finally {
             try {
@@ -140,6 +143,7 @@ public class ExpenseDaoImpl implements ExpenseDao{
                 }
                 if (connection != null) {
                     connection.close();
+                    LOGGER.info("Connection closed on AddReimbursement");
                 }
             }
             catch (SQLException e) {
@@ -147,7 +151,7 @@ public class ExpenseDaoImpl implements ExpenseDao{
             }
         }
         if (success != 0) {
-            //TODO log insert success
+            LOGGER.info("Database connected and new reimbursement request inserted to the database successfully for: " + reimb.getuAuthor().getuID());
         }
     }
 
@@ -179,7 +183,7 @@ public class ExpenseDaoImpl implements ExpenseDao{
         }
         catch (SQLException e) {
             e.printStackTrace();
-            //todo log update failure
+            LOGGER.error("There is a problem preventing reimbursement update request with rID: " + reimb.getrId() + " from updating to the database. Update request is coming from user: " +reimb.getuAuthor().getuID()  + e.getClass() + ": " + e.getMessage());
         }
         finally {
             try {
@@ -188,6 +192,7 @@ public class ExpenseDaoImpl implements ExpenseDao{
                 }
                 if (connection != null) {
                     connection.close();
+                    LOGGER.info("Connection closed on UpdateReimbursement");
                 }
             }
             catch (SQLException e) {
@@ -195,7 +200,7 @@ public class ExpenseDaoImpl implements ExpenseDao{
             }
         }
         if (success != 0) {
-            //TODO log update success
+            LOGGER.info("Database connected and reimbursement: " + reimb.getrId() + " updated in the database successfully for: " + reimb.getuAuthor().getuID());
         }
     }
 
@@ -211,6 +216,7 @@ public class ExpenseDaoImpl implements ExpenseDao{
             stmt = connection.prepareStatement(sql);
 
             ResultSet rs = stmt.executeQuery();
+            LOGGER.info("Database connected and expense type list returned successfully");
 
             while (rs.next()) {
 
@@ -225,7 +231,7 @@ public class ExpenseDaoImpl implements ExpenseDao{
         }
         catch (SQLException e) {
             e.printStackTrace();
-            //todo LOG Failure to retrieve ExpenseType list
+            LOGGER.error("Failed to retrieve Expense Type list " + e.getClass() + ": " + e.getMessage());
         }
 
         return exptypes;
@@ -244,6 +250,7 @@ public class ExpenseDaoImpl implements ExpenseDao{
             stmt = connection.prepareStatement(sql);
 
             ResultSet rs = stmt.executeQuery();
+            LOGGER.info("Database connected and expense status list returned successfully");
 
             while (rs.next()) {
 
@@ -258,12 +265,66 @@ public class ExpenseDaoImpl implements ExpenseDao{
         }
         catch (SQLException e) {
             e.printStackTrace();
-            //todo LOG Failure to retrieve ExpenseStatus list
+            LOGGER.error("Failed to retrieve Expense Status list " + e.getClass() + ": " + e.getMessage());
         }
 
         return expstats;
 
     }
 
+    public void DenyReimbursement(int rId, int denyID, Timestamp dTime){
 
+        PreparedStatement stmt = null;
+        int success = 0;
+        try (Connection connection = DaoUtilities.getConnection()) {
+
+            String sql =  "UPDATE erawesome.ers_reimbursements set r_resolved = ?, u_id_resolver = ? , rt_status = ? WHERE r_id = ?";
+            stmt = connection.prepareStatement(sql);
+
+            stmt.setTimestamp(1, dTime);
+            stmt.setInt(2, denyID);
+            stmt.setInt(3, 3);
+            stmt.setInt(4, rId);
+
+            success = stmt.executeUpdate();
+
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            //todo log update failure
+        }
+
+        if (success != 0) {
+            //TODO log update success
+        }
+
+    }
+
+    public void ApproveReimbursement(int rId, int approverID, Timestamp aTime){
+
+        PreparedStatement stmt = null;
+        int success = 0;
+        try (Connection connection = DaoUtilities.getConnection()) {
+
+            String sql =  "UPDATE erawesome.ers_reimbursements set r_resolved = ?, u_id_resolver = ? , rt_status = ? WHERE r_id = ?";
+            stmt = connection.prepareStatement(sql);
+
+            stmt.setTimestamp(1, aTime);
+            stmt.setInt(2, approverID);
+            stmt.setInt(3, 2);
+            stmt.setInt(4, rId);
+
+            success = stmt.executeUpdate();
+
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            //todo log update failure
+        }
+
+        if (success != 0) {
+            //TODO log update success
+        }
+
+    }
 }
