@@ -46,7 +46,7 @@ public class LoginServlet extends HttpServlet {
 
             LOGGER.info(user.getuID() + " not valid at login");
 
-            response.sendRedirect("login");
+            response.sendRedirect("index.html);
 
         }
         else {
@@ -60,17 +60,14 @@ public class LoginServlet extends HttpServlet {
 
                 LOGGER.info(user.getuID() + " successfully logged in!");
 
-                response.sendRedirect("UpdatePersonalData");
+            }
 
 
-                if (user.getuRole().getUrRole().equals("MANAGER")) {
-                    response.sendRedirect("mgrHome.html");
-                } else {
-                  
-                    response.sendRedirect("expenseSubmit.html");
-
-                }
-
+            if (user.getuRole().getUrRole().equals("MANAGER")) {
+                response.sendRedirect("ManagerView");
+            }
+            else {
+                response.sendRedirect("expenseSubmit.html");
 
             }
 

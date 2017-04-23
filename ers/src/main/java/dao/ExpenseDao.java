@@ -4,6 +4,7 @@ import model.Expense;
 import model.ExpenseStatus;
 import model.ExpenseType;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 /**
@@ -20,5 +21,9 @@ public interface ExpenseDao {
     public ArrayList<ExpenseType> getExpenseTypeList();
 
     public ArrayList<ExpenseStatus> getExpenseStatusList();
+
+    public void ApproveReimbursement(int rId, int approverID, Timestamp aTime);
+
+    public void DenyReimbursement(int rId, int denyID, Timestamp dTime);
 
 }
