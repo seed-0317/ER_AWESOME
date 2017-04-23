@@ -5,10 +5,7 @@ import model.ExpenseStatus;
 import model.ExpenseType;
 import model.User;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 /**
@@ -265,5 +262,59 @@ public class ExpenseDaoImpl implements ExpenseDao{
 
     }
 
+    public void DenyReimbursement(int rId, int denyID, Timestamp dTime){
 
+        PreparedStatement stmt = null;
+        int success = 0;
+        try (Connection connection = DaoUtilities.getConnection()) {
+
+            String sql =  "UPDATE erawesome.ers_reimbursements set r_resolved = ?, u_id_resolver = ? , rt_status = ? WHERE r_id = ?";
+            stmt = connection.prepareStatement(sql);
+
+            stmt.setTimestamp(1, dTime);
+            stmt.setInt(2, denyID);
+            stmt.setInt(3, 3);
+            stmt.setInt(4, rId);
+
+            success = stmt.executeUpdate();
+
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            //todo log update failure
+        }
+
+        if (success != 0) {
+            //TODO log update success
+        }
+
+    }
+
+    public void ApproveReimbursement(int rId, int approverID, Timestamp aTime){
+
+        PreparedStatement stmt = null;
+        int success = 0;
+        try (Connection connection = DaoUtilities.getConnection()) {
+
+            String sql =  "UPDATE erawesome.ers_reimbursements set r_resolved = ?, u_id_resolver = ? , rt_status = ? WHERE r_id = ?";
+            stmt = connection.prepareStatement(sql);
+
+            stmt.setTimestamp(1, aTime);
+            stmt.setInt(2, approverID);
+            stmt.setInt(3, 2);
+            stmt.setInt(4, rId);
+
+            success = stmt.executeUpdate();
+
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            //todo log update failure
+        }
+
+        if (success != 0) {
+            //TODO log update success
+        }
+
+    }
 }
