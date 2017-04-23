@@ -13,7 +13,7 @@ public class BusinessLogicUserInfoTest {
         BusinessLogicUserInfo bltest = new BusinessLogicUserInfo();
 
         String str1 = null;
-        String str2 = "ndfjkgshdjkghdakjghrjkaghkjagnfjksahfkjdsafgkdsgkdfsajfkdslndfjkgshdjghkjal";
+        String str2 = "ndfjkgshdjkghdakjghrjkaghkjagnfjksahfkjdsafgkdsgkdfsajfkdslndfjkgy      shdjghkjal";
         String str3 = "Sara ";
         String str4 = "";
         String str5 = "a";

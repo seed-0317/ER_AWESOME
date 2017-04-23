@@ -49,12 +49,12 @@ public class BusinessLogicReimbursement {
      *@param author
      * @return
      */
-    public boolean authorValid (String author) {
-        if ((author != null) && (author.length() > 0)) {
-            return true;
-        } else {
-            return false;
-        }
+//    public boolean authorValid (String author) {
+//        if ((author != null) && (author.length() > 0)) {
+//            return true;
+//        } else {
+//            return false;
+//        }
     }
 
     /**
@@ -73,4 +73,4 @@ public class BusinessLogicReimbursement {
      * @return updated user object
      */
  //can do if have time - this is represented in submitreimbursementservlet now
-}
+

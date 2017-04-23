@@ -1,0 +1,28 @@
+body.loginpage {
+    background-image: url('bacon.jpeg');
+    /*height: 100%;*/
+}
+
+div.mainheader {
+    color: white;
+    text-align: center;
+    margin-top: 150px;
+}
+
+h1#titleheader {
+    font-size: 100px;
+}
+
+h2#secondheader {
+    font-size: 50px;
+}
+
+
+div.well{
+    margin-top: -300px ;
+}
+
+/*html {*/
+    /*background-image: url('bank.jpeg');*/
+    /*height: 100%;*/
+/*}*/
