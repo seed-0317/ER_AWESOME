@@ -12,8 +12,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import org.apache.log4j.Logger;
 
 public class UserDaoImpl implements UserDao {
+
+    private static final Logger LOGGER = Logger.getLogger(UserDaoImpl.class);
 
     @Override
     public ArrayList<User> getAllUsers(){
@@ -29,6 +32,7 @@ public class UserDaoImpl implements UserDao {
             stmt = connection.prepareStatement(sql);
 
             ResultSet rs = stmt.executeQuery();
+            LOGGER.info("Connected to database and all users called successfully ");
 
             while (rs.next()) {
                 User u = new User();
@@ -49,6 +53,7 @@ public class UserDaoImpl implements UserDao {
         }
         catch (SQLException e) {
             e.printStackTrace();
+            LOGGER.error("There is a problem retrieving all users data from the database. Check database connection." + e.getClass() + ": " + e.getMessage());
         }
         finally {
             try {
@@ -57,6 +62,7 @@ public class UserDaoImpl implements UserDao {
                 }
                 if (connection != null) {
                     connection.close();
+                    LOGGER.info("Connection closed on getAllUsers");
                 }
             }
             catch (SQLException e) {
@@ -89,11 +95,14 @@ public class UserDaoImpl implements UserDao {
             stmt.setInt(6, emp.getuID());
 
             success = stmt.executeUpdate();
+            LOGGER.info("Database connected and employee data successfully updated in the database for: " + emp.getuID());
 
 
         }
         catch (SQLException e) {
             e.printStackTrace();
+            LOGGER.error("There is a problem preventing employee data from being updated for: " +emp.getuID()  + e.getClass() + ": " + e.getMessage());
+
         }
         finally {
             try {
@@ -102,6 +111,7 @@ public class UserDaoImpl implements UserDao {
                 }
                 if (connection != null) {
                     connection.close();
+                    LOGGER.info("Connection closed on updateEmployee");
                 }
             }
             catch (SQLException e) {
@@ -129,6 +139,7 @@ public class UserDaoImpl implements UserDao {
             stmt.setString(1, username);
 
             ResultSet rs = stmt.executeQuery();
+            LOGGER.info("Database connected and employee data successfully pulled from the database for: " + u.getuID());
 
 
             while (rs.next()) {
@@ -148,6 +159,7 @@ public class UserDaoImpl implements UserDao {
         }
         catch (SQLException e) {
             e.printStackTrace();
+            LOGGER.error("There is a problem pulling in the user's data from the database for: " +u.getuID() + e.getClass() + ": " + e.getMessage());
         }
         finally {
             try {
@@ -156,6 +168,7 @@ public class UserDaoImpl implements UserDao {
                 }
                 if (connection != null) {
                     connection.close();
+                    LOGGER.info("Connection closed on getUser");
                 }
             }
             catch (SQLException e) {
