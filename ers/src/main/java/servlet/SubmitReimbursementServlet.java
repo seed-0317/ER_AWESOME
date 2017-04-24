@@ -42,17 +42,16 @@ public class SubmitReimbursementServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        HttpSession session = req.getSession();
-     //   UserDao udao = DaoUtilities.getUserDao();
+
         HttpSession session = req.getSession();
         User currUser = (User)session.getAttribute("user");
 
-      //
+      //getting values from the forms
         double amount = Double.parseDouble(req.getParameter("amount"));
         String description = req.getParameter("description");
         String utype = req.getParameter("type");
 
-        LOGGER.info(currUser.getuID() + " is trying to submit a reimbursement" + "for $" + amount);
+        LOGGER.info(currUser.getuID() + " is trying to submit a reimbursement" + " for $" + amount);
 
         //Amanda code to catch submission errors pre dao call
         BusinessLogicReimbursement blreimbursement = new BusinessLogicReimbursement();
@@ -68,31 +67,32 @@ public class SubmitReimbursementServlet extends HttpServlet {
             resp.sendRedirect("viewMyExpenses");
         }
 
-//        stmt.setDouble(1, reimb.getrAmount());
-//        stmt.setString(2, reimb.getrDescription());
-//        stmt.setTimestamp(3, reimb.getrSubmitted());
-//        stmt.setTimestamp(4, reimb.getrResolved());
-//        stmt.setInt(5, reimb.getuAuthor().getuID());
-//
-//        int r = reimb.getuResolver().getuID();
-//        if (r !=0){
-//            stmt.setInt(6, r);
-//        }
-//        else {
-//            stmt.setNull(6, java.sql.Types.INTEGER );
-//        }
-//
-//        stmt.setInt(7, reimb.getrType().getRtId());
-//        stmt.setInt(8, reimb.getrStatus().getRsId());
-//        }
 
         else {
 
+            LOGGER.info(currUser.getuID() + " is trying to submit a reimbursement type of " + utype);
+
             ExpenseType currExpense = new ExpenseType();
-            currExpense.setRtType(utype);
+
+            //hardcoded the type ID, will update in the near future
+            if ("meals".equals(utype)) {
+                currExpense.setRtId(1);
+            }
+            else if ("travel".equals(utype)){
+                currExpense.setRtId(2);
+            }
+            else if ("mileage".equals(utype)){
+                currExpense.setRtId(3);
+            }
+            else if ("supplies".equals(utype)){
+                currExpense.setRtId(4);
+            }
+            else
+                currExpense.setRtId(5);
+
 
             ExpenseStatus currStatus = new ExpenseStatus();
-            currStatus.setRsStatus("1");
+            currStatus.setRsId(1);
             //LOGGER.info("Object is changing to submitted");
 
             Timestamp datesubmitted = new Timestamp(System.currentTimeMillis());
