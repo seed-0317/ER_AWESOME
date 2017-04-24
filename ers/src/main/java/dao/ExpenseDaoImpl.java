@@ -115,7 +115,7 @@ public class ExpenseDaoImpl implements ExpenseDao{
             stmt.setDouble(1, reimb.getrAmount());
             stmt.setString(2, reimb.getrDescription());
             stmt.setTimestamp(3, reimb.getrSubmitted());
-            stmt.setNull(6, Types.TIMESTAMP );
+            stmt.setNull(4, Types.TIMESTAMP );
             stmt.setInt(5, reimb.getuAuthor().getuID());
             stmt.setNull(6, java.sql.Types.INTEGER );
             stmt.setInt(7, reimb.getrType().getRtId());

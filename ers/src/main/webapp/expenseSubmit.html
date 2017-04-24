@@ -19,7 +19,6 @@
     .upper {
     top: 5%;
     height: 20%;
-    background-color: lavender;
     overflow:scroll;
     }
 
@@ -27,7 +26,8 @@
     top: 25%;
     bottom: 0;
     height: 75%;
-    background-color: white;
+    background-color:white;
+    overflow: scroll;
     }
     </style>
 </head>
@@ -107,14 +107,14 @@
             <label for="description">Expense Description</label>
             <input class="form-control" name = "description" id="description" type="text" placeholder="Reason for Expense">
         </div>
-        <div class="col-md-2"> <!--this needs to be dropdown>-->
+        <div class="col-md-2">
             <label for="type">Expense Type</label>
-            <select name = "type" class="form-control" id="type">
-                <option value="meals">Meals</option>
-                <option value="travel">Travel</option>
-                <option value="mileage">Mileage</option>
-                <option value="supplies">Supplies</option>
-                <option value="other">Other</option>
+            <select name="type" class="form-control" id="type">
+                <option value="meals">MEALS</option>
+                <option value="travel">TRAVEL</option>
+                <option value="mileage">MILEAGE</option>
+                <option value="supplies">SUPPLIES</option>
+                <option value="other">OTHER</option>
             </select>
         </div>
             <div class="col-md-2">
@@ -133,7 +133,7 @@
     </div>
 </body>
 
-/* Chatbot*/
+<!--/* Chatbot*/-->
 <link href="https://api.motion.ai/sdk/webchat.css" rel="stylesheet" type="text/css">
 <script src="https://api.motion.ai/sdk/webchat.js"></script>
 <script>
