@@ -24,7 +24,7 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("index.html").forward(request,response);
+        request.getRequestDispatcher("index.html").forward(request, response);
     }
 
     @Override
@@ -41,22 +41,39 @@ public class LoginServlet extends HttpServlet {
         LOGGER.info(user.getuID() + " is trying to login");
 
         BusinessLogicLogin bllogin = new BusinessLogicLogin();
-        if (!bllogin.usernameValid1(name)){
+        if (!bllogin.usernameValid1(name)) {
             //username input incorrect
-            LOGGER.info(user.getuID() + " not valid at login");
-            response.sendRedirect("login");
 
-        }
-        else {
+            LOGGER.info(user.getuID() + " not valid at login");
+
+            response.sendRedirect("index.html");
+
+        } else {
+
             if (user.getuUserName() == null) {
                 // user does not exist in database
                 LOGGER.info(user.getuID() + " doesn't exist in the database");
                 response.sendRedirect("login");
 
             } else {
+
                 LOGGER.info(user.getuID() + " successfully logged in!");
-                response.sendRedirect("UpdatePersonalData");
+
+
+//                why is this here?  Think it's causing redirect issue ???????
+//                response.sendRedirect("UpdatePersonalData");
+
+
+                if (user.getuRole().getUrRole().equals("MANAGER")) {
+                    response.sendRedirect("ManagerView");
+                } else {
+                    response.sendRedirect("viewMyExpenses");
+
+                }
+
+
             }
+
         }
     }
 }

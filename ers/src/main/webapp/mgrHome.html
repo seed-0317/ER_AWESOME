@@ -1,26 +1,76 @@
-e<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="shortcut icon" href="faviconmoney.ico"/>
     <meta charset="UTF-8">
     <title>Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+   <style>
+    hr {
+    height: 2px;
+    background-color:#555;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    }
+    </style>
 
 </head>
 <body>
 
 <div>
-
-
     <ul class="nav nav-pills">
+
         <li role="presentation" class="active"><a href="#">Expenses</a></li>
-        <li role="presentation"><a href="#">Employee Data</a></li>
-        <li role="presentation"><a href="#">Logout</a></li>
+        <li role="presentation"><a href="EmployeeView">Employee Data</a></li>
+        <li role="presentation"><a href="logout">Logout</a></li>
+
     </ul>
 
     <hr />
-
 </div>
+<div class = "container">
+    <div class="panel panel-primary">
+        <div class="panel-heading">Requisitions</div>
+        <div class="panel-body">
+
+             <#list expenselist as expense>
+              <div class ="row">
+                <div class = "col-sm-1">Amount: $ ${expense.rAmount}</div>
+                <div class = "col-sm-3">Description: ${(expense.rDescription) !""}</div>
+                <div class = "col-sm-2">Submitted: ${expense.rSubmitted}</div>
+                <div class = "col-sm-1">Submitted by: ${expense.uAuthor.uFirstName} ${expense.uAuthor.uLastName}</div>
+                <div class = "col-sm-2">Resolved: ${(expense.rResolved) !"na"}</div>
+                <div class = "col-sm-1">Resolved by: ${(expense.uResolver.uFirstName) !""} ${(expense.uResolver.uLastName) !"na"}</div>
+                <div class = "col-sm-1">Type: ${expense.rType.rtType}</div>
+                <div class = "col-sm-1">Status: ${expense.rStatus.rsStatus}</div>
+
+
+                  <div class = "col-sm-1">
+                    <form method="Post" action="/approve">
+                        <input type="integer" hidden="hidden" name="r_id" value="${expense.rId}"/>
+                        <button type="submit">Approve</button>
+                    </form>
+
+                  </div>
+
+                  <div class = "col-sm-1">
+                      <form method="Post" action="/deny">
+                          <input type="text" hidden="hidden" name="r_id" value="${expense.rId}"/>
+                          <button type="submit">Deny </button>
+                      </form>
+
+                  </div>
+
+              </div>
+                 <hr>
+             </#list>
+
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
