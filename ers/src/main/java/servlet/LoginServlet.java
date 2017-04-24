@@ -67,7 +67,7 @@ public class LoginServlet extends HttpServlet {
                 if (user.getuRole().getUrRole().equals("MANAGER")) {
                     response.sendRedirect("ManagerView");
                 } else {
-                    response.sendRedirect("expenseSubmit.html");
+                    response.sendRedirect("viewMyExpenses");
 
                 }
 

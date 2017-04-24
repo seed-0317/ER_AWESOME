@@ -30,33 +30,42 @@ import static java.lang.Double.parseDouble;
 public class SubmitReimbursementServlet extends HttpServlet {
 
     private static final Logger LOGGER = Logger.getLogger(SubmitReimbursementServlet.class);
-    User currUser = new User();
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("expenseSubmit.html").forward(req,resp);
-    }
+
+//    HttpSession session = request.getSession();
+//    User currUser = (User)session.getAttribute("user");
+
+
+//    @Override
+//    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        req.getRequestDispatcher("expenseSubmit.html").forward(req,resp);
+//    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        HttpSession session = req.getSession();
+     //   UserDao udao = DaoUtilities.getUserDao();
+        HttpSession session = req.getSession();
+        User currUser = (User)session.getAttribute("user");
 
-        Double amount = parseDouble(req.getParameter("amount"));
+      //
+        double amount = Double.parseDouble(req.getParameter("amount"));
         String description = req.getParameter("description");
         String utype = req.getParameter("type");
-        User currUser = (User)session.getAttribute("user");
-        LOGGER.info(currUser.getuID() + " is trying to submit a reimbursement");
+
+        LOGGER.info(currUser.getuID() + " is trying to submit a reimbursement" + "for $" + amount);
 
         //Amanda code to catch submission errors pre dao call
         BusinessLogicReimbursement blreimbursement = new BusinessLogicReimbursement();
         if (!blreimbursement.amountValid(amount)) {
             //amount input incorrect
             LOGGER.info(currUser.getuID() + " amount entry: " + amount +" not valid in reimbursement submission");
-            resp.sendRedirect("SubmitReimbursementServlet");
+            resp.sendRedirect("viewMyExpenses");
         }
 
         else if (!blreimbursement.descriptionValid(description)) {
             //description input incorrect
             LOGGER.info(currUser.getuID() + " description entry: "+ description +" not valid in reimbursement submission");
-            resp.sendRedirect("SubmitReimbursementServlet");
+            resp.sendRedirect("viewMyExpenses");
         }
 
 //        stmt.setDouble(1, reimb.getrAmount());
@@ -79,13 +88,11 @@ public class SubmitReimbursementServlet extends HttpServlet {
 
         else {
 
-            currUser.setuUserName(uauthor);
-
             ExpenseType currExpense = new ExpenseType();
             currExpense.setRtType(utype);
 
             ExpenseStatus currStatus = new ExpenseStatus();
-            currStatus.setRsStatus("Submitted");
+            currStatus.setRsStatus("1");
             //LOGGER.info("Object is changing to submitted");
 
             Timestamp datesubmitted = new Timestamp(System.currentTimeMillis());
@@ -109,16 +116,16 @@ public class SubmitReimbursementServlet extends HttpServlet {
 
                 req.getSession().setAttribute("message", "Reimbursement Added");
                 req.getSession().setAttribute("messageClass", "alert-success");
-                resp.sendRedirect("expenseSubmit.html");
+                resp.sendRedirect("viewMyExpenses");
 
             } catch (Exception e) {
                 e.printStackTrace();
-                LOGGER.error("Submit reimbursement request failed. Request from: " + currUser.getuID() + e.getClass() + ": " + e.getMessage());
+                LOGGER.error("Submit reimbursement request failed. Request from: " + currUser.getuID() + ": " + e.getMessage());
 
                 req.getSession().setAttribute("message", "There was a problem creating the submission");
                 req.getSession().setAttribute("messageClass", "alert-danger");
 
-                req.getRequestDispatcher("SubmitReimbursementServlet").forward(req, resp);
+                req.getRequestDispatcher("viewMyExpenses").forward(req, resp);
 
             }
         }
