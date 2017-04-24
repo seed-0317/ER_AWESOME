@@ -7,8 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="ERStyle.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
 
 
     <!--
@@ -45,8 +47,6 @@
 
             -->
 
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
 
     <style>
         hr {
@@ -60,7 +60,7 @@
 
 </head>
 
-<body>
+<body class="mainbackground">
 
     <div>
 
@@ -82,30 +82,38 @@
                 <label for="username">Username:</label>
 
                 <div class="form-inline">
-                <input type="text" class="form-control" id="username" name="username" value="${user.uUserName}">
-                    <button type="button" class="btn btn-sm btn-danger" data-toggle="popover" title="Username" data-content="Username must be less than X characters">info</button>
+                    <input type="text" class="form-control" id="username" name="username" value="${user.uUserName}">
+                    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="Username must be less than 40 char">?</button>
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="firstname">First Name:</label>
+
+                <div class="form-inline">
+                        <input type="text" class="form-control" id="firstname" name="firstname" value="${user.uFirstName}">
+                        <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="First name must be less than 40 char">?</button>
                 </div>
 
-
             </div>
 
             <div class="form-group">
-                <label for="first name">First Name:</label>
-                <input type="text" class="form-control" id="first name" name="firstname" value="${user.uFirstName}">
-                <a tabindex="0" class="btn btn-lg btn-danger" role="button" data-toggle="popover" data-trigger="focus" title="Dismissible popover" data-content="And here's some amazing content. It's very engaging. Right?">Dismissible popover</a>
-
-
+                <label for="lastname">Last Name:</label>
+                <div class="form-inline">
+                    <input type="text" class="form-control" id="lastname" name="lastname" value="${user.uLastName}">
+                    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="Last name must be less than 40 char">?</button>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="last name">Last Name:</label>
-                <input type="text" class="form-control" id="last name" name="lastname" value="${user.uLastName}">
-            </div>
             <div class="form-group">
                 <label for="email">Email:</label>
+                <div class="form-inline">
                 <input type="email" class="form-control" id="email" name="email" value="${user.uEmail}">
-            </div>
+                    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="Email must contain @ sign">?</button>
+                </div>
 
+            </div>
 
             <button type="submit" id="submitbutton" class="btn btn-default">Submit</button>
 
