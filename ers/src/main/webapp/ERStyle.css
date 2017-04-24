@@ -1,25 +1,7 @@
-body.loginpage {
-    background-image: url('bacon.jpeg');
+.loginbackground {
+    background-image: url('Plane-at-Sunset.jpg');
+    background-size: cover;
     /*height: 100%;*/
-}
-
-div.mainheader {
-    color: white;
-    text-align: center;
-    margin-top: 150px;
-}
-
-h1#titleheader {
-    font-size: 100px;
-}
-
-h2#secondheader {
-    font-size: 50px;
-}
-
-
-div.well{
-    margin-top: -300px ;
 }
 
 /*html {*/

@@ -46,10 +46,9 @@ public class LoginServlet extends HttpServlet {
 
             LOGGER.info(user.getuID() + " not valid at login");
 
-            response.sendRedirect("index.html);
+            response.sendRedirect("index.html");
 
-        }
-        else {
+        } else {
 
             if (user.getuUserName() == null) {
                 // user does not exist in database
@@ -65,18 +64,16 @@ public class LoginServlet extends HttpServlet {
 //                response.sendRedirect("UpdatePersonalData");
 
 
+                if (user.getuRole().getUrRole().equals("MANAGER")) {
+                    response.sendRedirect("ManagerView");
+                } else {
+                    response.sendRedirect("expenseSubmit.html");
 
-            if (user.getuRole().getUrRole().equals("MANAGER")) {
-                response.sendRedirect("ManagerView");
+                }
+
+
             }
-            else {
-                response.sendRedirect("expenseSubmit.html");
-
-            }
-
 
         }
-
     }
 }
-
