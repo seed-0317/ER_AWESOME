@@ -10,16 +10,64 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
+
+    <!--
+
+                                                             ............
+                                             .................................
+                                    ..........                         ..........
+                                                                          .........
+                                                                            .......
+             .d8888b.                    d8b 88              888            ......
+            d88P  Y88b                   Y8P 88              888          ......
+            888    888                       88              888    .88888....
+            888         8888b.  88888b.  888 888888  8888b.  888   d8'   `8b
+            888            "88b 888 "88b 888 888        "88b 888   88     88 88d888b. .d8888b.
+            888    888 .d888888 888  888 888 888    .d888888 888   88     88 88'  `88 88ooood8
+            Y88b  d88P 888  888 888 d88P 888 Y88b.  888  888 888   Y8.   .8P 88    88 88.  ...
+             "Y8888P"  "Y888888 88888P"  888  "Y888 "Y888888 888    `8888P'  dP    dP `88888P'
+                                888                           ...
+                                888                         ..
+                                888                      .
+
+              d888888b .d8888.          db   db d888888b d8888b. d888888b d8b   db  d888b
+                `88'   88'  YP          88   88   `88'   88  `8D   `88'   888o  88 88' Y8b
+                 88    `8bo.            88ooo88    88    88oobY'    88    88V8o 88 88
+                 88      `Y8b.          88~~~88    88    88`8b      88    88 V8o88 88  ooo
+                .88.   db   8D          88   88   .88.   88 `88.   .88.   88  V888 88. ~8~
+              Y888888P `8888Y'          YP   YP Y888888P 88   YD Y888888P VP   V8P  Y888P
+
+
+            Want to help build our website? Now hiring @
+
+            http://www.capitalone.com/technology-explorers
+
+
+            -->
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+    <style>
+        hr {
+            height: 2px;
+            background-color:#555;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+    </style>
+
 </head>
 
 <body>
 
-<div>
+    <div>
 
 
     <ul class="nav nav-pills">
-        <li role="presentation" class="active"><a href="#">Expenses</a></li>
-        <li role="presentation"><a href="/UpdatePersonalData">Employee Data</a></li>
+        <li role="presentation"><a href="viewMyExpenses">Expenses</a></li>
+        <li role="presentation" class="active"><a href="#">Employee Data</a></li>
         <li role="presentation"><a href="logout">Logout</a></li>
     </ul>
 
@@ -29,14 +77,24 @@
 
 <div>
     <form role="form" method="post" id="user">
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div class="form-group">
                 <label for="username">Username:</label>
+
+                <div class="form-inline">
                 <input type="text" class="form-control" id="username" name="username" value="${user.uUserName}">
+                    <button type="button" class="btn btn-sm btn-danger" data-toggle="popover" title="Username" data-content="Username must be less than X characters">info</button>
+                </div>
+
+
             </div>
+
             <div class="form-group">
                 <label for="first name">First Name:</label>
                 <input type="text" class="form-control" id="first name" name="firstname" value="${user.uFirstName}">
+                <a tabindex="0" class="btn btn-lg btn-danger" role="button" data-toggle="popover" data-trigger="focus" title="Dismissible popover" data-content="And here's some amazing content. It's very engaging. Right?">Dismissible popover</a>
+
+
             </div>
 
             <div class="form-group">
@@ -57,6 +115,7 @@
     </form>
 </div>
 
+</body>
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel" aria-hidden="true">
@@ -80,16 +139,9 @@
     </div><!-- /.modal-dialog -->
 </div>
 
-<script>
-    $(document).ready(function(){
-       $("#submitbutton").click(function () {
-           function(data,status) {
-                     alert(("data:"+data+" status "+ status));
-           }
-       })
-    });
-</script>
 
+<script src="JavaScript/JS.js"></script>
 
 </body>
+
 </html>
