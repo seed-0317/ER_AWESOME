@@ -35,10 +35,8 @@
 
     <ul class="nav nav-pills">
     <li role="presentation" class="active"><a href="#">Expenses</a></li>
-    <li role="presentation"><a href="#">Employee Data</a></li>
-
+    <li role="presentation"><a href="/UpdatePersonalData">Employee Data</a></li>
     <li role="presentation"><a href="/logout">Logout</a></li>
-      
     </ul>
     <hr />
 </div>
@@ -113,7 +111,7 @@
         </div>
         <div class="col-md-2"> <!--this needs to be dropdown>-->
             <label for="type">Expense Type</label>
-            <select name = "types" class="form-control" id="type" type="text" placeholder="Meals">
+            <select name = "types" class="form-control" id="type">
                 <option value="meals">Meals</option>
                 <option value="travel">Travel</option>
                 <option value="mileage">Mileage</option>
@@ -123,7 +121,7 @@
         </div>
             <div class="col-md-2">
                 <label for="author">Submitted by</label>
-                <input class="form-control" id="author" type="text" value="${user.uFirstName}">
+                <input class="form-control" id="author" type="text" value="${user.username}">
             </div>
         <br />
             <div class="col-md-2">

@@ -42,7 +42,7 @@ public class SubmitReimbursementServlet extends HttpServlet {
         Double amount = parseDouble(req.getParameter("amount"));
         String description = req.getParameter("description");
         String utype = req.getParameter("type");
-        String uauthor = req.getParameter("author");
+        User currUser = (User)session.getAttribute("user");
         LOGGER.info(currUser.getuID() + " is trying to submit a reimbursement");
 
         //Amanda code to catch submission errors pre dao call
@@ -59,11 +59,22 @@ public class SubmitReimbursementServlet extends HttpServlet {
             resp.sendRedirect("SubmitReimbursementServlet");
         }
 
-// don't need this as uauthor is autopopulated
-// else if (!blreimbursement.authorValid(uauthor)) {
-//            //author input incorrect
-//            resp.sendRedirect("SubmitReimbursementServlet");
-//            LOGGER.info(uauthor + " author not valid");
+//        stmt.setDouble(1, reimb.getrAmount());
+//        stmt.setString(2, reimb.getrDescription());
+//        stmt.setTimestamp(3, reimb.getrSubmitted());
+//        stmt.setTimestamp(4, reimb.getrResolved());
+//        stmt.setInt(5, reimb.getuAuthor().getuID());
+//
+//        int r = reimb.getuResolver().getuID();
+//        if (r !=0){
+//            stmt.setInt(6, r);
+//        }
+//        else {
+//            stmt.setNull(6, java.sql.Types.INTEGER );
+//        }
+//
+//        stmt.setInt(7, reimb.getrType().getRtId());
+//        stmt.setInt(8, reimb.getrStatus().getRsId());
 //        }
 
         else {

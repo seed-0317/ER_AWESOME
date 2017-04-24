@@ -21,9 +21,28 @@ public class Expense {
         this.rAmount = rAmount;
         this.rDescription = rDescription;
         this.rSubmitted = rSubmitted;
-        this.rType = rType;
+        this.rResolved = null; //trying this out
         this.uAuthor = uAuthor;
+        this.uResolver = null; //trying this out
+        this.rType = rType;
         this.rStatus = rStatus;
+
+//        stmt.setDouble(1, reimb.getrAmount());
+//        stmt.setString(2, reimb.getrDescription());
+//        stmt.setTimestamp(3, reimb.getrSubmitted());
+//        stmt.setTimestamp(4, reimb.getrResolved());
+//        stmt.setInt(5, reimb.getuAuthor().getuID());
+//
+//        int r = reimb.getuResolver().getuID();
+//        if (r !=0){
+//            stmt.setInt(6, r);
+//        }
+//        else {
+//            stmt.setNull(6, java.sql.Types.INTEGER );
+//        }
+//
+//        stmt.setInt(7, reimb.getrType().getRtId());
+//        stmt.setInt(8, reimb.getrStatus().getRsId());
     }
 
     public int getrId() {
