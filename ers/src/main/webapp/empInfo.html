@@ -11,7 +11,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 
-
     <!--
 
                                                              ............
@@ -45,7 +44,10 @@
 
 
             -->
+
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
     <style>
         hr {
             height: 2px;
@@ -75,14 +77,24 @@
 
 <div>
     <form role="form" method="post" id="user">
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div class="form-group">
                 <label for="username">Username:</label>
+
+                <div class="form-inline">
                 <input type="text" class="form-control" id="username" name="username" value="${user.uUserName}">
+                    <button type="button" class="btn btn-sm btn-danger" data-toggle="popover" title="Username" data-content="Username must be less than X characters">info</button>
+                </div>
+
+
             </div>
+
             <div class="form-group">
                 <label for="first name">First Name:</label>
                 <input type="text" class="form-control" id="first name" name="firstname" value="${user.uFirstName}">
+                <a tabindex="0" class="btn btn-lg btn-danger" role="button" data-toggle="popover" data-trigger="focus" title="Dismissible popover" data-content="And here's some amazing content. It's very engaging. Right?">Dismissible popover</a>
+
+
             </div>
 
             <div class="form-group">
@@ -127,14 +139,9 @@
     </div><!-- /.modal-dialog -->
 </div>
 
-<script>
-    $(document).ready(function(){
-       $("#submitbutton").click(function () {
-           function(data,status) {
-                     alert(("data:"+data+" status "+ status));
-           }
-       })
-    });
-</script>
+
+<script src="JavaScript/JS.js"></script>
+
+</body>
 
 </html>
