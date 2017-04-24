@@ -36,9 +36,7 @@
     <ul class="nav nav-pills">
     <li role="presentation" class="active"><a href="#">Expenses</a></li>
     <li role="presentation"><a href="UpdatePersonalData">Employee Data</a></li>
-
     <li role="presentation"><a href="/logout">Logout</a></li>
-      
     </ul>
     <hr />
 </div>
@@ -60,7 +58,7 @@
     <hr />
     <div color="black">
         <#list expenses as expense>
-            <#if expense.uAuthor.uFirstName == user.uFirstName>
+            <#if expense.uAuthor.uUserName == user.uUserName>
                 <div class="row">
             <div class="col-md-1">${(expense.rId) !"N/A"}</div>
             <div class="col-md-1">${(expense.rAmount) !"N/A"}</div>
@@ -101,19 +99,15 @@
         <div class = "row">
         <div class="col-md-1">
             <label for="amount">Amount</label>
-            <input class="form-control" id="amount" type="text" placeholder="$0.00">
+            <input class="form-control" name="amount" id="amount" type="text" placeholder="0.00">
         </div>
         <div class="col-md-3">
             <label for="description">Expense Description</label>
-            <input class="form-control" id="description" type="text" placeholder="Reason for Expense">
-        </div>
-        <div class="col-md-2">
-            <label for="submitted">Date submitted</label>
-            <input class="form-control" id="submitted" type="text" placeholder="1/1/2017">
+            <input class="form-control" name = "description" id="description" type="text" placeholder="Reason for Expense">
         </div>
         <div class="col-md-2"> <!--this needs to be dropdown>-->
             <label for="type">Expense Type</label>
-            <select name = "types" class="form-control" id="type" type="text" placeholder="Meals">
+            <select name = "type" class="form-control" id="type">
                 <option value="meals">Meals</option>
                 <option value="travel">Travel</option>
                 <option value="mileage">Mileage</option>
@@ -122,13 +116,14 @@
             </select>
         </div>
             <div class="col-md-2">
-                <label for="author">Submitted by</label>
-                <input class="form-control" id="author" type="text" value="${user.uFirstName}">
+                <label>Submitted by:</label>
+                <br />
+                <label>${user.uUserName}</label>
             </div>
         <br />
             <div class="col-md-2">
             <div class ="form-group">
-            <button type="submit" class="btn" value="Login">Submit</button>
+            <button type="submit" class="btn">Submit</button>
             </div>
         </div>
         </div>

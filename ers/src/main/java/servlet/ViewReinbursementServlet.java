@@ -23,7 +23,6 @@ import java.util.List;
 @WebServlet (value = "/viewMyExpenses")
 public class ViewReinbursementServlet extends HttpServlet {
 
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ExpenseDao dao = DaoUtilities.getExpenseDao();
@@ -33,6 +32,17 @@ public class ViewReinbursementServlet extends HttpServlet {
 
         req.getRequestDispatcher("expenseSubmit.html").forward(req, resp);
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        ExpenseDao dao = DaoUtilities.getExpenseDao();
+        List<Expense> expenses = dao.getAllExpenses();
+
+        req.getSession().setAttribute("expenses", expenses);
+
+        req.getRequestDispatcher("expenseSubmit.html").forward(req, resp);
+    }
+
 
 }
 
