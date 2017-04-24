@@ -41,9 +41,9 @@
                 <div class = "col-sm-1">Amount: $ ${expense.rAmount}</div>
                 <div class = "col-sm-3">Description: ${(expense.rDescription) !""}</div>
                 <div class = "col-sm-2">Submitted: ${expense.rSubmitted}</div>
-                <div class = "col-sm-1">Submitted by: ${expense.uAuthor.uLastName}</div>
+                <div class = "col-sm-1">Submitted by: ${expense.uAuthor.uFirstName} ${expense.uAuthor.uLastName}</div>
                 <div class = "col-sm-2">Resolved: ${(expense.rResolved) !"na"}</div>
-                <div class = "col-sm-1">Resolved by: ${(expense.uResolver.uLastName) !"na"}</div>
+                <div class = "col-sm-1">Resolved by: ${(expense.uResolver.uFirstName) !""} ${(expense.uResolver.uLastName) !"na"}</div>
                 <div class = "col-sm-1">Type: ${expense.rType.rtType}</div>
                 <div class = "col-sm-1">Status: ${expense.rStatus.rsStatus}</div>
 
@@ -51,7 +51,7 @@
                   <div class = "col-sm-1">
                     <form method="Post" action="/approve">
                         <input type="integer" hidden="hidden" name="r_id" value="${expense.rId}"/>
-                        <button type="submit">Approve</button>>
+                        <button type="submit">Approve</button>
                     </form>
 
                   </div>
@@ -59,7 +59,7 @@
                   <div class = "col-sm-1">
                       <form method="Post" action="/deny">
                           <input type="text" hidden="hidden" name="r_id" value="${expense.rId}"/>
-                          <button type="submit">Deny </button>>
+                          <button type="submit">Deny </button>
                       </form>
 
                   </div>
