@@ -30,49 +30,68 @@ import static java.lang.Double.parseDouble;
 public class SubmitReimbursementServlet extends HttpServlet {
 
     private static final Logger LOGGER = Logger.getLogger(SubmitReimbursementServlet.class);
-    User currUser = new User();
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("expenseSubmit.html").forward(req,resp);
-    }
+
+//    HttpSession session = request.getSession();
+//    User currUser = (User)session.getAttribute("user");
+
+
+//    @Override
+//    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        req.getRequestDispatcher("expenseSubmit.html").forward(req,resp);
+//    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        double amount = parseDouble(req.getParameter("amount"));
-        System.out.println("amount = " + amount);
+
+        HttpSession session = req.getSession();
+        User currUser = (User)session.getAttribute("user");
+
+      //getting values from the forms
+        double amount = Double.parseDouble(req.getParameter("amount"));
+
         String description = req.getParameter("description");
         String utype = req.getParameter("type");
-        String uauthor = req.getParameter("author");
-        LOGGER.info(currUser.getuID() + " is trying to submit a reimbursement");
+
+        LOGGER.info(currUser.getuID() + " is trying to submit a reimbursement" + " for $" + amount);
 
         //Amanda code to catch submission errors pre dao call
         BusinessLogicReimbursement blreimbursement = new BusinessLogicReimbursement();
         if (!blreimbursement.amountValid(amount)) {
             //amount input incorrect
             LOGGER.info(currUser.getuID() + " amount entry: " + amount +" not valid in reimbursement submission");
-            resp.sendRedirect("SubmitReimbursementServlet");
+            resp.sendRedirect("viewMyExpenses");
         }
 
         else if (!blreimbursement.descriptionValid(description)) {
             //description input incorrect
             LOGGER.info(currUser.getuID() + " description entry: "+ description +" not valid in reimbursement submission");
-            resp.sendRedirect("SubmitReimbursementServlet");
+            resp.sendRedirect("viewMyExpenses");
         }
 
-// don't need this as uauthor is autopopulated
-// else if (!blreimbursement.authorValid(uauthor)) {
-//            //author input incorrect
-//            resp.sendRedirect("SubmitReimbursementServlet");
-//            LOGGER.info(uauthor + " author not valid");
-//        }
 
         else {
 
-            currUser.setuUserName(uauthor);
+            LOGGER.info(currUser.getuID() + " is trying to submit a reimbursement type of " + utype);
 
             ExpenseType currExpense = new ExpenseType();
-            currExpense.setRtType(utype);
+
+            //hardcoded the type ID, will update in the near future
+            if ("meals".equals(utype)) {
+                currExpense.setRtId(1);
+            }
+            else if ("travel".equals(utype)){
+                currExpense.setRtId(2);
+            }
+            else if ("mileage".equals(utype)){
+                currExpense.setRtId(3);
+            }
+            else if ("supplies".equals(utype)){
+                currExpense.setRtId(4);
+            }
+            else
+                currExpense.setRtId(5);
+
 
             ExpenseStatus currStatus = new ExpenseStatus();
             currStatus.setRsId(1);
@@ -99,16 +118,16 @@ public class SubmitReimbursementServlet extends HttpServlet {
 
                 req.getSession().setAttribute("message", "Reimbursement Added");
                 req.getSession().setAttribute("messageClass", "alert-success");
-                resp.sendRedirect("expenseSubmit.html");
+                resp.sendRedirect("viewMyExpenses");
 
             } catch (Exception e) {
                 e.printStackTrace();
-                LOGGER.error("Submit reimbursement request failed. Request from: " + currUser.getuID() + e.getClass() + ": " + e.getMessage());
+                LOGGER.error("Submit reimbursement request failed. Request from: " + currUser.getuID() + ": " + e.getMessage());
 
                 req.getSession().setAttribute("message", "There was a problem creating the submission");
                 req.getSession().setAttribute("messageClass", "alert-danger");
 
-                req.getRequestDispatcher("SubmitReimbursementServlet").forward(req, resp);
+                req.getRequestDispatcher("viewMyExpenses").forward(req, resp);
 
             }
         }
