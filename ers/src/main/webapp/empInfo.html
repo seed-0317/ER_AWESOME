@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="ERStyle.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -82,8 +84,9 @@
                 <label for="username">Username:</label>
 
                 <div class="form-inline">
+                    <i class= "fa fa-user"></i>
                     <input type="text" class="form-control" id="username" name="username" value="${user.uUserName}">
-                    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="Username must be less than 40 char">?</button>
+                    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="Username must be less than 40 characters and must exist.">?</button>
 
                 </div>
             </div>
@@ -92,8 +95,9 @@
                 <label for="firstname">First Name:</label>
 
                 <div class="form-inline">
+                    <i class="fa fa-user-plus" aria-hidden="true"></i>
                         <input type="text" class="form-control" id="firstname" name="firstname" value="${user.uFirstName}">
-                        <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="First name must be less than 40 char">?</button>
+                        <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="First name must be less than 30 characters and must exist and must be A-Z">?</button>
                 </div>
 
             </div>
@@ -101,29 +105,30 @@
             <div class="form-group">
                 <label for="lastname">Last Name:</label>
                 <div class="form-inline">
+                    <i class="fa fa-user-plus" aria-hidden="true"></i>
                     <input type="text" class="form-control" id="lastname" name="lastname" value="${user.uLastName}">
-                    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="Last name must be less than 40 char">?</button>
+                    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="Last name must be less than 30 characters and must exist and must be A-Z">?</button>
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="email">Email:</label>
                 <div class="form-inline">
+                    <i class="fa fa-envelope" aria-hidden="true"></i>
                 <input type="email" class="form-control" id="email" name="email" value="${user.uEmail}">
-                    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="Email must contain @ sign">?</button>
+                    <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="Email must contain @ sign and be less than 100 characters.">?</button>
                 </div>
-
             </div>
 
-            <button type="submit" id="submitbutton" class="btn btn-default">Submit</button>
-
-            <!--<button type="submit" class="btn btn-default" id="modelSubmit1" a href="#myModal" data-toggle="modal" datatarget="#myModal">Submit</button>-->
+            <button type="submit" class="btn btn-default" id="modelSubmit1">Submit</button>
 
         </div>
     </form>
 </div>
 
 </body>
+
+
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel" aria-hidden="true">
@@ -146,6 +151,30 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div>
+
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">×
+                </button>
+                <h4 class="modal-title" id="myModalLabel2">
+                    Please try again with the correct specifications.  Look at '?'s for help!
+                </h4>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">Close
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+
+
 
 
 <script src="JavaScript/JS.js"></script>
