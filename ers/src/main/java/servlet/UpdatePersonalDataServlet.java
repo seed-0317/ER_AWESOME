@@ -51,26 +51,30 @@ public class UpdatePersonalDataServlet extends HttpServlet{
         if (!bluserinfo.usernameValid(username)){
             //username input incorrect
             LOGGER.info("Username entry:" + username +" by " + user.getuID() +" not valid in an update personal data submission");
-            resp.sendRedirect("UpdatePersonalData");
+//            resp.sendRedirect("UpdatePersonalData");
+            resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
         }
 
         else if (!bluserinfo.firstNameValid(firstname)){
             //firstname input incorrect
             LOGGER.info("First name entry:" + firstname +" by " + user.getuID() +" not valid in an update personal data submission");
-            resp.sendRedirect("UpdatePersonalData");
+//            resp.sendRedirect("UpdatePersonalData");
+            resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
         }
 
         else if (!bluserinfo.lastNameValid(lastname)){
             //lastname input incorrect
             LOGGER.info("Last name entry:" + lastname + " by " + user.getuID() +" not valid in an update personal data submission");
-            resp.sendRedirect("UpdatePersonalData");
+//            resp.sendRedirect("UpdatePersonalData");
+            resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
         }
 
         else if
             (!bluserinfo.emailValid(email)) {
             //email input incorrect
             LOGGER.info("email entry:" + email + " by " + user.getuID() + " not valid in an update personal data submission");
-            resp.sendRedirect("UpdatePersonalData");
+//            resp.sendRedirect("UpdatePersonalData");
+            resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
             }
         //
         else {
@@ -100,7 +104,7 @@ public class UpdatePersonalDataServlet extends HttpServlet{
 
             session.setAttribute("user", user);
 
-            resp.sendRedirect("UpdatePersonalData");
+//            resp.sendRedirect("UpdatePersonalData");
         }
     }
 }
