@@ -17,6 +17,8 @@ public interface UserDao {
 
     public User getUser (String username);
 
+    public ArrayList<User> getUsersWithExpenses();
+
 
 }
 

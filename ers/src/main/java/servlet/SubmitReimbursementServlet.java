@@ -43,11 +43,13 @@ public class SubmitReimbursementServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+
         HttpSession session = req.getSession();
         User currUser = (User)session.getAttribute("user");
 
       //getting values from the forms
         double amount = Double.parseDouble(req.getParameter("amount"));
+
         String description = req.getParameter("description");
         String utype = req.getParameter("type");
 

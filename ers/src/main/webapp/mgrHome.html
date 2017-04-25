@@ -36,6 +36,41 @@
 </div>
 <div class = "container">
     <div class="panel panel-primary">
+        <div class="panel-heading">Show Requisitions for:</div>
+        <div class="panel-body">
+
+            <form method="get" action = "filterExpenses">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <label for="Status">Status</label>
+                        <select name = "status" class="form-control" id="status" type="text" placeholder="ALL">
+                            <option value="-1">ALL</option>
+                            <#list statusList as st>
+                                <option value="${st.rsId}">${st.rsStatus}</option>
+                            </#list>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <label for="emp">Employee</label>
+                        <select name = "emp" class="form-control" id="emp" type="text" placeholder="ALL">
+                            <option value="-1">ALL</option>
+                            <#list userList as user>
+                                <option value="${user.uID}">${user.uFirstName} ${user.uLastName}</option>
+                            </#list>
+                        </select>
+                    </div>
+                </div>
+                <HR>
+                <button type="submit">Apply Filter</button>
+            </form>
+        </div>
+    </div>
+
+
+</div>
+
+<div class = "container">
+    <div class="panel panel-primary">
         <div class="panel-heading">Requisitions</div>
         <div class="panel-body">
 

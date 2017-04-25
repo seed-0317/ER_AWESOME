@@ -26,4 +26,6 @@ public interface ExpenseDao {
 
     public void DenyReimbursement(int rId, int denyID, Timestamp dTime);
 
+    public ArrayList<Expense> getFilteredExpenses(int rStatus, int uID);
+
 }
