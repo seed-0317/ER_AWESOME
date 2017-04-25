@@ -48,7 +48,7 @@ public class SubmitReimbursementServlet extends HttpServlet {
         User currUser = (User)session.getAttribute("user");
 
       //getting values from the forms
-        double amount = Double.parseDouble(req.getParameter("amount"));
+       double amount = Double.parseDouble(req.getParameter("amount"));
 
         String description = req.getParameter("description");
         String utype = req.getParameter("type");
