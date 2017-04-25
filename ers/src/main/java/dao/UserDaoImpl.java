@@ -83,7 +83,7 @@ public class UserDaoImpl implements UserDao {
         try{
             connection = DaoUtilities.getConnection();
             String sql =  "UPDATE erawesome.ers_users set u_username = ?, u_firstname = ?, u_lastname = ?, ";
-            sql = sql + "u_email = ?, ur_id = ? WHERE u_id = ?";
+            sql = sql + " u_email = ?, ur_id = ? WHERE u_id = ?";
             stmt = connection.prepareStatement(sql);
 
 
@@ -179,5 +179,45 @@ public class UserDaoImpl implements UserDao {
         return u;
     }
 
+    public ArrayList<User> getUsersWithExpenses(){
+        ArrayList<User> users = new ArrayList<>();
+        PreparedStatement stmt = null;
+
+        try (Connection connection = DaoUtilities.getConnection()){
+
+            String sql =  "SELECT a.u_id, a.u_username, a.u_firstname, a.u_lastname, a.u_email ";
+            sql = sql + "  ,b.ur_id, b.ur_role from erawesome.ers_users a join erawesome.ers_user_roles b on b.ur_id = a.ur_id";
+            sql = sql + "  where a.u_id in (select distinct u_id_author from erawesome.ers_reimbursements )";
+
+            stmt = connection.prepareStatement(sql);
+
+            ResultSet rs = stmt.executeQuery();
+            LOGGER.info("Connected to database and getUsersWithExpenses called successfully ");
+
+            while (rs.next()) {
+                User u = new User();
+
+                u.setuID(rs.getInt("u_id"));
+                u.setuUserName(rs.getString("u_username"));
+                u.setuFirstName(rs.getString("u_firstname"));
+                u.setuLastName(rs.getString("u_lastname"));
+                u.setuEmail(rs.getString("u_email"));
+                UserRoles r = new UserRoles();
+                r.setUrId(rs.getInt("ur_id"));
+                r.setUrRole(rs.getString("ur_role"));
+                u.setuRole(r);
+
+                users.add(u);
+            }
+
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            LOGGER.error("There is a problem retrieving getUsersWithExpenses data from the database. Check database connection." + e.getClass() + ": " + e.getMessage());
+        }
+
+        return users;
+
+    }
 
 }

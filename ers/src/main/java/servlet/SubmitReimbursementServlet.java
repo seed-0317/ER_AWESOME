@@ -39,7 +39,8 @@ public class SubmitReimbursementServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        Double amount = parseDouble(req.getParameter("amount"));
+        double amount = parseDouble(req.getParameter("amount"));
+        System.out.println("amount = " + amount);
         String description = req.getParameter("description");
         String utype = req.getParameter("type");
         String uauthor = req.getParameter("author");
@@ -74,7 +75,7 @@ public class SubmitReimbursementServlet extends HttpServlet {
             currExpense.setRtType(utype);
 
             ExpenseStatus currStatus = new ExpenseStatus();
-            currStatus.setRsStatus("Submitted");
+            currStatus.setRsId(1);
             //LOGGER.info("Object is changing to submitted");
 
             Timestamp datesubmitted = new Timestamp(System.currentTimeMillis());

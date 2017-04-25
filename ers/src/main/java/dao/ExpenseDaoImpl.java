@@ -319,4 +319,97 @@ public class ExpenseDaoImpl implements ExpenseDao{
         }
 
     }
+
+    public ArrayList<Expense> getFilteredExpenses(int rStatus, int emp){
+        // return all employees if emp = -1
+        // return all status id rStatus = -1
+
+        ArrayList<Expense> expenses = new ArrayList<>();
+        PreparedStatement stmt = null;
+        UserDaoImpl dao = new UserDaoImpl();
+
+        System.out.println("dao assigned in getFilteredExpenses");
+        System.out.println("emp =" + emp + "  rStatus = " + rStatus);
+
+        try (Connection connection = DaoUtilities.getConnection()){
+            String sql =  "SELECT a.r_id, a.r_amount, a.r_description, a.r_submitted, a.r_resolved,";
+            sql = sql + "  b.u_id as author_id, b.u_username as authorname,";
+            sql = sql + "  c.u_id as resolver_id, c.u_username as resolvername, d.rs_id, d.rs_status, e.rt_id, e.rt_type";
+            sql = sql + "  from erawesome.ers_reimbursements a";
+            sql = sql + "  join erawesome.ers_users b on b.u_id = a.u_id_author";
+
+            sql = sql + "  left join erawesome.ers_users c on c.u_id = a.u_id_resolver";
+
+            sql = sql + "  join erawesome.ers_reimbursement_status d on d.rs_id = a.rt_status";
+            sql = sql + "  join erawesome.ers_reimbursement_type e on e.rt_id = a.rt_type";
+
+            if (rStatus >=0 && emp >= 0) {  // filter on both
+                sql = sql + " WHERE b.u_id = ? and  a.rt_status = ?";
+                stmt = connection.prepareStatement(sql);
+                stmt.setInt(1, emp);
+                System.out.println("emp set in stmt for BOTH filter");
+
+                stmt.setInt(2, rStatus);
+                System.out.println("rStatus set in stmt for BOTH filter");
+            }
+            else if ( rStatus >=0) { // filter on status only
+                sql = sql + " WHERE a.rt_status = ?";
+                stmt = connection.prepareStatement(sql);
+                stmt.setInt(1, rStatus);
+            }
+            else if ( emp >=0) {  //filter on u_id only
+                sql = sql + " WHERE b.u_id = ? ";
+                stmt = connection.prepareStatement(sql);
+                stmt.setInt(1, emp);
+            }
+            else {
+                stmt = connection.prepareStatement(sql);
+            }
+            //else there are NO filters so stmt is ready
+
+            ResultSet rs = stmt.executeQuery();
+            LOGGER.info("Connected to database and filtered expenses called successfully");
+
+            while (rs.next()) {
+
+                Expense exp = new Expense();
+
+                exp.setrId(rs.getInt("r_id"));
+                exp.setrAmount(rs.getDouble("r_amount"));
+                exp.setrDescription(rs.getString("r_description"));
+                exp.setrSubmitted(rs.getTimestamp("r_submitted"));
+                exp.setrResolved(rs.getTimestamp("r_resolved"));
+
+                //Add Author user object
+                User author = dao.getUser(rs.getString("authorname"));
+                exp.setuAuthor(author);
+
+                //Add Resolver user object
+                User resolver = dao.getUser(rs.getString("resolvername"));
+                exp.setuResolver(resolver);
+
+                //Add Expense Type Object
+                ExpenseType etype = new ExpenseType();
+                etype.setRtId(rs.getInt("rt_id"));
+                etype.setRtType(rs.getString("rt_type"));
+                exp.setrType(etype);
+
+                //Add Expense Status Object
+                ExpenseStatus estat = new ExpenseStatus();
+                estat.setRsId(rs.getInt("rs_id"));
+                estat.setRsStatus(rs.getString("rs_status"));
+                exp.setrStatus(estat);
+
+                expenses.add(exp);
+            }
+
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            LOGGER.error("There is a problem retrieving filtered expenses data from the database. Check database connection." + e.getClass() + ": " + e.getMessage());
+
+        }
+
+        return expenses;
+    }
 }
