@@ -39,23 +39,21 @@
         <div class="panel-heading">Show Requisitions for:</div>
         <div class="panel-body">
 
-            <form method="get" action = "filterExpenses">
+            <form method="get" action = "filterExpenses" id="filterfrm">
                 <div class="row">
                     <div class="col-sm-2">
                         <label for="Status">Status</label>
-                        <select name = "status" class="form-control" id="status" type="text" placeholder="ALL">
-                            <option value="-1">ALL</option>
+                        <select name = "status" class="form-control" id="status" type="text" placeholder="Select">
                             <#list statusList as st>
-                                <option value="${st.rsId}">${st.rsStatus}</option>
+                                <option value="${st.rsId}" ${st.selected}>${st.rsStatus}</option>
                             </#list>
                         </select>
                     </div>
                     <div class="col-sm-2">
                         <label for="emp">Employee</label>
-                        <select name = "emp" class="form-control" id="emp" type="text" placeholder="ALL">
-                            <option value="-1">ALL</option>
+                        <select name = "emp" class="form-control" id="emp" type="text" placeholder="Select">
                             <#list userList as user>
-                                <option value="${user.uID}">${user.uFirstName} ${user.uLastName}</option>
+                                <option value="${user.uID}" ${user.selected}>${user.name}</option>
                             </#list>
                         </select>
                     </div>
