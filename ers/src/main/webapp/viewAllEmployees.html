@@ -6,7 +6,19 @@
     <title>Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="ERStyle.css">
+
+    <style>
+        hr {
+            height: 2px;
+            background-color:#555;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+    </style>
+
 
 
 </head>
@@ -25,45 +37,25 @@
 
 </div>
 
-<div class="lower">
-    <h2><u>All Employees</u></h2>
-    <table class="table table-hovered">
-        <thead class="table-bordered">
-        <tr>
-            <th class="col-md-2">User Name</th>
-            <th class="col-md-2">Fist Name</th>
-            <th class="col-md-2">Last Name</th>
-            <th class="col-md-2">Email</th>
-            <th class="col-md-2">Role</th>
-        </tr>
-        </thead>
-        <tbody>
+<div class="container">
+<div class="panel panel-primary">
+    <div class="panel-heading">All Employees</div>
+
+    <div class="panel-body">
 
             <#list userlist as list>
-                <tr>
-                <td class="col-md-2">${list.uUserName}</td>
-                <td class="col-md-2">${list.uFirstName}</td>
-                <td class="col-md-2">${list.uLastName}</td>
-                <td class="col-md-2">${list.uEmail}</td>
-                <td class="col-md-2">${list.uRole.urRole}</td>
-                </tr>
+                <div class="row">
+                <div class="col-md-2">Username: ${list.uUserName}</div>
+                <div class="col-md-2">First Name: ${list.uFirstName}</div>
+                <div class="col-md-2">Last Name: ${list.uLastName}</div>
+                <div class="col-md-3">Email: ${list.uEmail}</div>
+                <div class="col-md-2">Role: ${list.uRole.urRole}</div>
+                </div>
+                <hr>
             </#list>
-        </tbody>
-    </table>
 </div>
-
-
-
-
-<!--<div>-->
-
-    <!--<ul>-->
-        <!--<#list userlist as list>-->
-            <!--<li> ${list.uUserName}</li>-->
-        <!--</#list>-->
-    <!--</ul>-->
-
-<!--</div>-->
+</div>
+</div>
 
 
 </body>

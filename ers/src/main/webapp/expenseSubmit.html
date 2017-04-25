@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="ERStyle.css">
 
     <style>
@@ -20,20 +20,27 @@
     .upper {
     top: 5%;
     height: 20%;
+        margin-outside: 20px;
+        margin-left: 30px;
     overflow:scroll;
     }
 
     .lower {
     top: 25%;
-    bottom: 0;
+    bottom: 10%;
+        margin-left: 30px;
+        margin-right: 30px;
+        margin-bottom: 20px;
     height: 75%;
-    background-color:white;
+    /*background-color:white;*/
     overflow: scroll;
+    border: none;
     }
+
     </style>
 </head>
 
-<body class="mainbackground">
+<body class="mainbackground" MARGINLEFT=30px>
 <div>
 
     <ul class="nav nav-pills">
@@ -44,61 +51,53 @@
     <hr />
 </div>
 
+<!--<div class="panel panel-primary">-->
+    <!--<div class="panel-heading">Requisitions</div>-->
+    <!--<div class="panel-body">-->
+
 
 <div class="container">
- <div class="lower">
-     <h2><u>Previous Expense Submissions</u></h2>
-     <hr />
-     <div class="col-md-1"><strong>Request ID</strong></div>
-     <div class="col-md-1"><strong>Amount</strong></div>
-     <div class="col-md-3"><strong>Expense Description</strong></div>
-     <div class="col-md-2"><strong>Date Submitted</strong></div>
-     <div class="col-md-1"><strong>Date Resolved</strong></div>
-     <div class="col-md-1"><strong>Type</strong></div>
-     <div class="col-md-1"><strong>Expense Status</strong></div>
-     <div class="col-md-1"><strong>Expense Submitter</strong></div>
-     <div class="col-md-1"><strong>Expense Resolver</strong></div>
-    <hr />
-    <div color="black">
-        <#list expenses as expense>
+    <div class="lower">
+     <div class="panel panel-primary">
+     <h3><u>My Previous Expense Submissions</u></h3>
+     <hr color="none" >
+     <div class="col-sm-1"><strong>Request ID</strong></div>
+     <div class="col-sm-1"><strong>Amount</strong></div>
+     <div class="col-sm-3"><strong>Expense Description</strong></div>
+     <div class="col-sm-2"><strong>Date Submitted</strong></div>
+     <div class="col-sm-2"><strong>Date Resolved</strong></div>
+     <div class="col-sm-1"><strong>Type</strong></div>
+     <div class="col-sm-1"><strong>Expense Status</strong></div>
+     <!--<div class="col-sm-1"><strong>Expense Submitter</strong></div>-->
+     <div class="col-sm-1"><strong>Expense Resolver</strong></div>
+         <br />
+
+        <hr style="height:2px;border:none;color:#333;background-color:#333;" />
+        <div class="panel panel-body" style=border:none>
+            <#list expenses as expense>
             <#if expense.uAuthor.uUserName == user.uUserName>
                 <div class="row">
-            <div class="col-md-1">${(expense.rId) !"N/A"}</div>
-            <div class="col-md-1">${(expense.rAmount) !"N/A"}</div>
-            <div class="col-md-3">${(expense.rDescription) !"N/A"}</div>
-            <div class="col-md-2">${(expense.rSubmitted) !"N/A"}</div>
-            <div class="col-md-1">${(expense.rResolved)  !"N/A"}</div>
-            <div class="col-md-1">${(expense.rType.rtType)  !"N/A"}</div>
-            <div class="col-md-1">${(expense.rStatus.rsStatus) !"N/A"}</div>
-            <div class="col-md-1">${(expense.uAuthor.uLastName)  !"N/A"}</div>
-            <div class="col-md-1">${(expense.uResolver.uLastName) !"N/A"}</div>
+            <div class="col-sm-1">${(expense.rId) !"N/A"}</div>
+            <div class="col-sm-1">${(expense.rAmount) !"N/A"}</div>
+            <div class="col-sm-3">${(expense.rDescription) !"N/A"}</div>
+            <div class="col-sm-2">${(expense.rSubmitted) !"N/A"}</div>
+            <div class="col-sm-2">${(expense.rResolved)  !"N/A"}</div>
+            <div class="col-sm-1">${(expense.rType.rtType)  !"N/A"}</div>
+            <div class="col-sm-1">${(expense.rStatus.rsStatus) !"N/A"}</div>
+            <!--<div class="col-sm-1">${(expense.uAuthor.uLastName)  !"N/A"}</div>-->
+            <div class="col-sm-1">${(expense.uResolver.uLastName) !"N/A"}</div>
+                    <hr style="height:1px;border:none;color:#333;background-color:#333;" />
                 </div>
             </#if>
         </#list>
+        </div>
     </div>
-
-<!--This is just dummy data for now-->
-        <!--<tbody>-->
-            <!--<tr>-->
-                <!--<td>1</td>-->
-                <!--<td>27.99</td>-->
-                <!--<td>Meal for Client</td>-->
-                <!--<td>3/31/17 10:00:00</td>-->
-                <!--<td>4/17/17 10:00:00</td>-->
-                <!--<td>Meals</td>-->
-                <!--<td>Resolved</td>-->
-                <!--<td>Mr.Employee</td>-->
-                <!--<td>Mr.Big</td>-->
-            <!--</tr>-->
-            <!---->
-
- </div>
-
+     </div>
  </div>
 
     <div class = "upper">
     <form class ="form inline" action="SubmitReimbursementServlet" method = "post">
-        <h2><u>New Expense Submission</u></h2>
+        <h3><u>New Expense Submission</u></h3>
         <div class = "row">
         <div class="col-md-1">
             <label for="amount">Amount</label>
