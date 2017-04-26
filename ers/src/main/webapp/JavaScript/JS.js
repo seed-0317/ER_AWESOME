@@ -25,8 +25,8 @@ $(document).ready(function () {
                     $('#myModal').modal('show')},
             
            error:function (xhr, ajaxOptions, thrownError){
-                    if(xhr.status==404) {
-                    $('#myModal2').modal('show')}},
+                    
+                    $('#myModal2').modal('show')},
 
         });
     });
