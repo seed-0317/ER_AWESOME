@@ -70,7 +70,7 @@ public class BusinessLogicUserInfoTest {
         Assert.assertFalse("Last name is >0 characters", bltest1.lastNameValid(str4));
         Assert.assertTrue("Last name is >0 characters", bltest1.lastNameValid(str5));
         Assert.assertTrue("Last name is >0 characters", bltest1.lastNameValid(str6));
-        Assert.assertTrue("Last name is A-Z only", bltest1.lastNameValid(str7));
+        Assert.assertFalse("Last name is A-Z only", bltest1.lastNameValid(str7));
 
     }
 
