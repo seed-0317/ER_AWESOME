@@ -1,12 +1,14 @@
 .loginbackground {
     background-image: url('Plane-at-Sunset.jpg');
-    background-size: cover;
+    background-size: 100% 150%;
+    background-repeat: no-repeat;
     /*height: 100%;*/
 }
 
 .mainbackground {
     background-image: url('Screen Shot 2017-04-24 at 2.36.32 PM.png');
-    background-size: cover;
+    background-size: 100% 150%;
+    background-repeat: no-repeat;
 }
 
 
