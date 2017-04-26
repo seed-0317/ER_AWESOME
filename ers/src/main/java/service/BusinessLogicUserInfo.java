@@ -47,9 +47,21 @@ public class BusinessLogicUserInfo {
 
 
     public boolean lastNameValid(String lastname) {
-        if ((lastname != null) && (lastname.length() < 30) && (lastname.length() > 0)) {
+        if (lastname == null) {
+            return false;
+        }
+
+        for (int i = 0; i < lastname.trim().length(); i++) {
+            if (!isLetter(lastname.trim().charAt(i))) {
+                return false;
+            }
+        }
+
+        if ((lastname.trim().length() < 30) && (lastname.trim().length() > 0)) {
             return true;
-        } else {
+        } else
+
+        {
             return false;
         }
     }
