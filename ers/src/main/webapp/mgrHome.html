@@ -85,7 +85,7 @@
 
 
                   <div class = "col-sm-1">
-                    <form method="Post" action="/approve">
+                    <form method="Post" action="/approve" onsubmit="return confirm('Approve this requisition?')">
                         <input type="integer" hidden="hidden" name="r_id" value="${expense.rId}"/>
                         <button type="submit">Approve</button>
                     </form>
@@ -93,7 +93,7 @@
                   </div>
 
                   <div class = "col-sm-1">
-                      <form method="Post" action="/deny">
+                      <form method="Post" action="/deny" onsubmit="return confirm('Deny this requisition?');">
                           <input type="text" hidden="hidden" name="r_id" value="${expense.rId}"/>
                           <button type="submit">Deny </button>
                       </form>
