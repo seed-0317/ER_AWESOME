@@ -78,7 +78,7 @@
             <#if expense.uAuthor.uUserName == user.uUserName>
                 <div class="row">
             <div class="col-sm-1">${(expense.rId) !"N/A"}</div>
-            <div class="col-sm-1">${(expense.rAmount) !"N/A"}</div>
+            <div class="col-sm-1">$${(expense.rAmount) !"N/A"}</div>
             <div class="col-sm-3">${(expense.rDescription) !"N/A"}</div>
             <div class="col-sm-2">${(expense.rSubmitted) !"N/A"}</div>
             <div class="col-sm-2">${(expense.rResolved)  !"N/A"}</div>
