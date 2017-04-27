@@ -7,7 +7,8 @@
 
 .mainbackground {
     background-image: url('Screen Shot 2017-04-24 at 2.36.32 PM.png');
-    overflow-y: hidden;
+    background-size: 8000px 4000px;
+    background-repeat: no-repeat;
 }
 
 
